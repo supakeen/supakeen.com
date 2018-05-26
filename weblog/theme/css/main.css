@@ -1,0 +1,122 @@
+@font-face {
+	font-family: "Standard Galactic Alphabet";
+	src: url("../fonts/sga.ttf");
+}
+
+@font-face {
+	font-family: "Keen 4";
+	src: url("../fonts/keen4.ttf");
+}
+
+@font-face {
+  font-family: "Rasa";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/rasa-regular.ttf");
+}
+
+@font-face {
+  font-family: "Inconsolata";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/inconsolata-regular.ttf");
+}
+
+html {
+	background: linear-gradient(to bottom, #333, #111);
+	color: #54fc54;
+	min-height: 100%;
+}
+
+body {
+	width: 600px;
+	margin: 2em auto;
+}
+
+h1, h2, h3 {
+	font-family: "Keen 4";
+	text-align: center;
+}
+
+header h1 {
+	font-size: 3rem;
+	padding-bottom: 1rem;
+	border-bottom: .5rem solid #54fc54;
+}
+
+header h1 a {
+    text-decoration: none;
+}
+
+section h1 {
+	font-size: 2rem;
+}
+
+section h2 {
+	font-size: 1.3rem;
+}
+
+section h3 {
+	font-size: 1rem;
+}
+
+
+p, ul, footer {
+	color: #fefefe;
+	font-size: 1.1rem;
+	font-family: "Rasa";
+	line-height: 1.5rem;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+ul li {
+	background-image: url("../images/asset1.png");
+	background-position: top left;
+	background-repeat: no-repeat;
+	height: 35px;
+	padding-left: 35px;
+	line-height: 35px;
+}
+
+pre {
+	border-bottom: 1px solid #54fc54;
+	background: #111;
+	color: #fefefe;
+	padding: 1rem;
+	font-family: "Inconsolata";
+}
+
+img {
+	max-width: 100%;
+}
+
+a {
+	color: #54fc54;
+	text-decoration: underline;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+code, cite {
+	display: inline-block;
+	font-family: "Inconsolata";
+	padding: 0 2px;
+	background-color: #111;
+	color: #fefefe;
+    font-style: normal;
+}
+
+footer {
+    text-align: center;
+}
+
+footer p {
+    font-size: 10px;
+}
