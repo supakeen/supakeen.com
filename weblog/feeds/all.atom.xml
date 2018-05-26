@@ -12,17 +12,18 @@ to all languages and operating systems.&lt;/p&gt;
 &lt;h2&gt;Command Injection&lt;/h2&gt;
 &lt;p&gt;To start out you need to understand why executing commands from Python can be
 dangerous. This principle applies to all languages and is called
-&lt;strong&gt;Command Injection&lt;/strong&gt;, there's some examples on the &lt;a class="reference external" href="https://www.owasp.org/index.php/Command_Injection"&gt;OWASP&lt;/a&gt; pages and the &lt;a class="reference external" href="https://cwe.mitre.org/data/definitions/77.html"&gt;CWE-77&lt;/a&gt;
-page and I will provide my own here.&lt;/p&gt;
-&lt;p&gt;Here is some code that will restart a service on your system by name of one of
-arguments it receives. Let's name our program &lt;cite&gt;service.py&lt;/cite&gt; and make it a way
-in Python to execute commands called &lt;a class="reference external" href="https://docs.python.org/3/library/os.html#os.system"&gt;os.system&lt;/a&gt;.&lt;/p&gt;
+&lt;strong&gt;Command Injection&lt;/strong&gt;, there are  some examples on the &lt;a class="reference external" href="https://www.owasp.org/index.php/Command_Injection"&gt;OWASP&lt;/a&gt; pages and the &lt;a class="reference external" href="https://cwe.mitre.org/data/definitions/77.html"&gt;CWE-77&lt;/a&gt;
+page. I will provide my own here.&lt;/p&gt;
+&lt;p&gt;Here is some code that will restart a service on your system by the name of
+the argument it receives. I name this program &lt;cite&gt;service.py&lt;/cite&gt; and its goal is
+to restart services. To do that it uses a function to execute commands called
+&lt;a class="reference external" href="https://docs.python.org/3/library/os.html#os.system"&gt;os.system&lt;/a&gt;.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
 &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If we call our program as &lt;cite&gt;python service.py nginx&lt;/cite&gt; the string that gets put
+&lt;p&gt;If we call our program with &lt;cite&gt;python service.py nginx&lt;/cite&gt; the string that gets put
 into our &lt;cite&gt;os.system&lt;/cite&gt;-call will be the string &lt;cite&gt;systemctl restart nginx&lt;/cite&gt; and all
 is good in the world. However, if someone calls our program as
 &lt;cite&gt;python service.py 'nginx;cat /etc/passwd'&lt;/cite&gt; our executed command will become:&lt;/p&gt;
@@ -36,8 +37,8 @@ in many shapes and forms and is something you want to prevent.&lt;/p&gt;
 especially careful. This can be in scripts such as the example above or websites,
 network protocols, and others. Sometimes input can be things you wouldn't
 expect to be input and is a reason why I won't call it &lt;em&gt;user input&lt;/em&gt; in this
-article. It can be for example a HTTP request made by your application that is
-changed by a man in the middle attack on an unsafe network and puts the client
+article. It can be, for example, an HTTP request made by your application that is
+changed by a man in the middle attack on an unsafe network, which can put the client
 at risk.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="how-does-a-command-get-executed"&gt;
@@ -45,9 +46,9 @@ at risk.&lt;/p&gt;
 &lt;p&gt;Before I can talk about how to prevent these types of attacks it is important
 to dive a tiny bit deeper. How does a command get executed by your operating
 system?&lt;/p&gt;
-&lt;p&gt;In general your operating systems library will use a set of functions called
-&lt;cite&gt;exec*&lt;/cite&gt; functions where the &lt;cite&gt;*&lt;/cite&gt; can be filled with a variety of letters. They are
-documented in the &lt;a class="reference external" href="https://linux.die.net/man/3/exec"&gt;man-pages&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In general your operating system's library will use a set of functions called
+&lt;cite&gt;exec*&lt;/cite&gt; functions where the &lt;cite&gt;*&lt;/cite&gt; can be filled with a variety of letters. They
+are documented in the &lt;a class="reference external" href="https://linux.die.net/man/3/exec"&gt;man-pages&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;These seem a bit daunting but in general all these functions follow the same
 pattern. They all take a &lt;cite&gt;path&lt;/cite&gt; or &lt;cite&gt;file&lt;/cite&gt; to execute, if the function takes a
 &lt;cite&gt;file&lt;/cite&gt; the path to the name of that file will be looked up by parsing the
@@ -73,18 +74,17 @@ Shells allow executing multiple commands at once, they have built-ins that allow
 you to do things without calling commands. Someone can chain everything they want
 in there by gaining control of a parameter that gets fed to a shell and shells get
 involved in places where you sometimes don't know they will be.&lt;/p&gt;
-&lt;p&gt;Can we make arguments passed to shells safe? No, not really. You always want to
-use a method which preferably circumvents opening a shell at all or you run the
-risk of missing one of the many ways in which shells can be operated.&lt;/p&gt;
+&lt;p&gt;Can we make arguments passed to shells safe? No, not really. You want to
+use a function which does not use a shell at all to prevent shell-based
+exploits.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ways-to-execute-commands-in-python"&gt;
 &lt;h2&gt;Ways to execute commands in Python&lt;/h2&gt;
 &lt;p&gt;Python 3 offers a variety of ways for executing commands but there is one which
 springs out and that is the &lt;a class="reference external" href="https://docs.python.org/3/library/"&gt;subprocess&lt;/a&gt;-module.&lt;/p&gt;
 &lt;p&gt;The &lt;a class="reference external" href="https://docs.python.org/3/library/"&gt;subprocess&lt;/a&gt;-module allows us to execute commands without opening a shell to
-parse our string into the appropriate parts but to instead let it do that
-ourselves. This puts us at much lower risk of accidentally letting something get
-executed which we don't want.&lt;/p&gt;
+parse our string into the appropriate parts. This puts us at minimal risk for
+being exploited.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Note: Of course the program you are executing through subprocess can still have
 its own flaws that allow it to be subverted to do things you don't want.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Let's make a version of our previous program using subprocess. Subprocess offers
@@ -132,9 +132,9 @@ execute the second command giving the output to the new process.&lt;/p&gt;
 &lt;p&gt;File redirection (&lt;cite&gt;&amp;gt;&lt;/cite&gt;, and others) can be done in the same way by storing the
 output and then writing it to a file in Python.&lt;/p&gt;
 &lt;p&gt;For most command line utilities you would normally use with these operators you
-can either trivially implement them in Python or find a library on &lt;a class="reference external" href="https://pypi.python.org"&gt;PyPI&lt;/a&gt; to give
-you the output directly instead of trying to parse &lt;cite&gt;ip&lt;/cite&gt;, &lt;cite&gt;ifconfig&lt;/cite&gt;, or others
-in a shell instead of in Python.&lt;/p&gt;
+can either trivially implement them in Python. You can also try to find a library
+on &lt;a class="reference external" href="https://pypi.python.org"&gt;PyPI&lt;/a&gt; to give you the output directly instead of trying to parse &lt;cite&gt;ip&lt;/cite&gt;, &lt;cite&gt;ifconfig&lt;/cite&gt;,
+or others in a shell.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="what-if-i-really-really-need-a-shell"&gt;
 &lt;h2&gt;What if I really really need a shell?&lt;/h2&gt;
