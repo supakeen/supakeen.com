@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2018-05-25T12:00:00+02:00</updated><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:weblog/0x01.html</id><summary type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2018-05-25T12:00:00+02:00</updated><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/0x01.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
 on. Some of them inherently unsafe, some of them safe in nature but easy to
 use in an unsafe way.&lt;/p&gt;
 &lt;p&gt;Here I will set out to document the current ways to execute commands with
@@ -18,7 +19,7 @@ page. I will provide my own here.&lt;/p&gt;
 the argument it receives. I name this program &lt;cite&gt;service.py&lt;/cite&gt; and its goal is
 to restart services. To do that it uses a function to execute commands called
 &lt;a class="reference external" href="https://docs.python.org/3/library/os.html#os.system"&gt;os.system&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
 &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
@@ -27,7 +28,7 @@ to restart services. To do that it uses a function to execute commands called
 into our &lt;cite&gt;os.system&lt;/cite&gt;-call will be the string &lt;cite&gt;systemctl restart nginx&lt;/cite&gt; and all
 is good in the world. However, if someone calls our program as
 &lt;cite&gt;python service.py 'nginx;cat /etc/passwd'&lt;/cite&gt; our executed command will become:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;systemctl restart nginx&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;systemctl restart nginx&lt;span class="p"&gt;;&lt;/span&gt;
 cat /etc/passwd
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Where I have added the newline myself for clarity. Our program was not intended to
@@ -89,7 +90,7 @@ being exploited.&lt;/p&gt;
 its own flaws that allow it to be subverted to do things you don't want.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Let's make a version of our previous program using subprocess. Subprocess offers
 many functions but they all follow the same rules for their arguments:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
 
 &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;restart&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
@@ -102,7 +103,7 @@ the arguments will each be passed as a separate argument.&lt;/p&gt;
 &lt;p&gt;This means arguments are not interpreted by a shell first and this makes it impossible
 for someone to execute other commands through the shell.&lt;/p&gt;
 &lt;p&gt;If you pass a single string to subprocess such as:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
 
 &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart nginx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -118,7 +119,7 @@ arguments to your executable.&lt;/p&gt;
 can be set to &lt;cite&gt;True&lt;/cite&gt;. If you do so then you can only pass a string which will
 be passed the same way, as &lt;cite&gt;sh -c 'command'&lt;/cite&gt;, if you do pass a list then it will
 be passed as:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;execve(&amp;quot;/bin/sh&amp;quot;, [&amp;quot;/bin/sh&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;systemctl&amp;quot;, &amp;quot;restart&amp;quot;, &amp;quot;nginx&amp;quot;], ...
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;execve(&amp;quot;/bin/sh&amp;quot;, [&amp;quot;/bin/sh&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;systemctl&amp;quot;, &amp;quot;restart&amp;quot;, &amp;quot;nginx&amp;quot;], ...
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -143,4 +144,4 @@ rules for shells. Specifically you could try to use &lt;cite&gt;shlex.quote&lt;/
 you fill in. Reasoning about what is 'safe' or 'unsafe' becomes very difficult in
 this context.&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="python"></category><category term="subprocess"></category></entry></feed>
+</content><category term="python"></category><category term="subprocess"></category></entry></feed>

