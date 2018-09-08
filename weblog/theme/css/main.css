@@ -89,6 +89,7 @@ pre {
 	color: #fefefe;
 	padding: 1rem;
 	font-family: "Inconsolata";
+    overflow-x: auto;
 }
 
 img {

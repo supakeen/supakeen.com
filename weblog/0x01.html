@@ -4,13 +4,12 @@
         <meta charset="utf-8" />
         <title>Executing commands safely from Python</title>
         <link rel="shortcut icon" type="image/icon" href="theme/images/favicon.ico"/>
-        <link rel="stylesheet" href="./theme/css/main.css" />
-        <link href="https://supakeen.com/weblog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="supakeen Atom Feed" />
+        <link rel="stylesheet" href="/theme/css/main.css" />
     </head>
 
     <body>
         <header>
-            <h1><a href="./">supakeen </a></h1>
+            <h1><a href="/">supakeen </a></h1>
         </header>
 <section>
     <article>
@@ -34,7 +33,7 @@ page. I will provide my own here.</p>
 the argument it receives. I name this program <cite>service.py</cite> and its goal is
 to restart services. To do that it uses a function to execute commands called
 <a class="reference external" href="https://docs.python.org/3/library/os.html#os.system">os.system</a>.</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;systemctl restart {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
@@ -43,7 +42,7 @@ to restart services. To do that it uses a function to execute commands called
 into our <cite>os.system</cite>-call will be the string <cite>systemctl restart nginx</cite> and all
 is good in the world. However, if someone calls our program as
 <cite>python service.py 'nginx;cat /etc/passwd'</cite> our executed command will become:</p>
-<div class="highlight"><pre>systemctl restart nginx<span class="p">;</span>
+<div class="highlight"><pre><span></span>systemctl restart nginx<span class="p">;</span>
 cat /etc/passwd
 </pre></div>
 <p>Where I have added the newline myself for clarity. Our program was not intended to
@@ -105,7 +104,7 @@ being exploited.</p>
 its own flaws that allow it to be subverted to do things you don't want.</strong></p>
 <p>Let's make a version of our previous program using subprocess. Subprocess offers
 many functions but they all follow the same rules for their arguments:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
 
 <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s2">&quot;systemctl&quot;</span><span class="p">,</span> <span class="s2">&quot;restart&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
@@ -118,7 +117,7 @@ the arguments will each be passed as a separate argument.</p>
 <p>This means arguments are not interpreted by a shell first and this makes it impossible
 for someone to execute other commands through the shell.</p>
 <p>If you pass a single string to subprocess such as:</p>
-<div class="highlight"><pre><span class="kn">import</span> <span class="nn">subprocess</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
 
 <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;systemctl restart nginx&quot;</span><span class="p">)</span>
 </pre></div>
@@ -134,7 +133,7 @@ arguments to your executable.</p>
 can be set to <cite>True</cite>. If you do so then you can only pass a string which will
 be passed the same way, as <cite>sh -c 'command'</cite>, if you do pass a list then it will
 be passed as:</p>
-<div class="highlight"><pre>execve(&quot;/bin/sh&quot;, [&quot;/bin/sh&quot;, &quot;-c&quot;, &quot;systemctl&quot;, &quot;restart&quot;, &quot;nginx&quot;], ...
+<div class="highlight"><pre><span></span>execve(&quot;/bin/sh&quot;, [&quot;/bin/sh&quot;, &quot;-c&quot;, &quot;systemctl&quot;, &quot;restart&quot;, &quot;nginx&quot;], ...
 </pre></div>
 </div>
 </div>
