@@ -13,14 +13,18 @@ def main():
         targets = ["github", "ipns"]
 
     if "ipns" in targets:
+        print("Publishing to IPFS")
         site = subprocess.check_output(["ipfs", "add", "-r", path])
         site = site.splitlines()[-1].split()[1]
+        print("Content hash", site.decode("ascii"))
+        print("Updating ipns name")
         subprocess.check_output(["ipfs", "name", "publish", site])
 
         # TODO this is obviously not easy to solve and will always point to the
         # TODO old content hash for the site, however do people on IPFS and are
         # TODO already on the site really want to confirm??
 
+        print("Rewriting index")
         with open("index.html", "r") as handle:
             index = handle.read()
 
