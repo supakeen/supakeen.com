@@ -79,7 +79,7 @@ Listening on [0.0.0.0] (family 0, port 4242)
 Connection from localhost 44040 received!
 $
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Our command injection has worked and is now connected to our netcat. However
+&lt;p&gt;Our command injection has worked and is now connected to our netcat. But
 this shell has a few issues! When we run a program and try to &lt;cite&gt;ctrl+c&lt;/cite&gt; it our
 netcat program exits. And trying to run &lt;cite&gt;su&lt;/cite&gt; yields another error:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nc -lv 4242
@@ -91,7 +91,7 @@ $
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The reason of why is not relevant in this article but the gist is that your
 command injection was not allocated a &lt;cite&gt;pty&lt;/cite&gt;. We can work around that by
-first gaining a tty using python.&lt;/p&gt;
+first gaining a pty using python.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nc -lv 4242
 Listening on [0.0.0.0] (family 0, port 4242)
 Connection from localhost 44040 received!
