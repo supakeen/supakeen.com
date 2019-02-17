@@ -4,13 +4,12 @@
         <meta charset="utf-8" />
         <title>Upgrading a reverse shell?</title>
         <link rel="shortcut icon" type="image/icon" href="theme/images/favicon.ico"/>
-        <link rel="stylesheet" href="./theme/css/main.css" />
-        <link href="https://supakeen.com/weblog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="supakeen Atom Feed" />
+        <link rel="stylesheet" href="/theme/css/main.css" />
     </head>
 
     <body>
         <header>
-            <h1><a href="./">supakeen </a></h1>
+            <h1><a href="/">supakeen </a></h1>
         </header>
 <section>
     <article>
@@ -94,7 +93,7 @@ Listening on [0.0.0.0] (family 0, port 4242)
 Connection from localhost 44040 received!
 $
 </pre></div>
-<p>Our command injection has worked and is now connected to our netcat. However
+<p>Our command injection has worked and is now connected to our netcat. But
 this shell has a few issues! When we run a program and try to <cite>ctrl+c</cite> it our
 netcat program exits. And trying to run <cite>su</cite> yields another error:</p>
 <div class="highlight"><pre><span></span>$ nc -lv 4242
@@ -106,7 +105,7 @@ $
 </pre></div>
 <p>The reason of why is not relevant in this article but the gist is that your
 command injection was not allocated a <cite>pty</cite>. We can work around that by
-first gaining a tty using python.</p>
+first gaining a pty using python.</p>
 <div class="highlight"><pre><span></span>$ nc -lv 4242
 Listening on [0.0.0.0] (family 0, port 4242)
 Connection from localhost 44040 received!
