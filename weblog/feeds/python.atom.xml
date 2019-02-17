@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2018-05-25T12:00:00+02:00</updated><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/0x01.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2019-01-16T12:00:00+01:00</updated><entry><title>Dangers in Python's standard library</title><link href="https://supakeen.com/weblog/0x03.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/0x03.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;The Python programming language comes with &amp;quot;Batteries Included&amp;quot;. A philosophy
+to have a large and immediately useful standard library. However, since the
+standard library comes with Python it is hard to refactor for older code
+depends on it. Because of this the standard library can in many cases be quite
+far behind what is available in the ecosystem as a whole.&lt;/p&gt;
+&lt;p&gt;Some of the Python standard library is downright dangerous. By dangerous I mean
+that special care has to be taken when using certain functions. This article
+highlights some of the more well known issues with the standard library but is
+by no means a comprehensive list of everything that can go wrong nor a claim
+that the Python standard library is bad.&lt;/p&gt;
+&lt;p&gt;This article is only about modules in the standard library, dangerous syntax,
+types, and other language abilities are saved for another day. As always pay
+attention and try to think 'what does this actually do and can it be used in
+a different way'.&lt;/p&gt;
+&lt;p&gt;Don't consider this to be a definitive list at any point in time. The initial
+listed modules are popularly used.&lt;/p&gt;
+&lt;div class="section" id="pickle"&gt;
+&lt;h2&gt;pickle&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://docs.python.org/3/library/pickle.html#module-pickle"&gt;Pickle&lt;/a&gt; is a module in Python land to serialize 'arbitrary' objects. It is
+often used when someone needs an easy way to send an objects' state elsewhere.&lt;/p&gt;
+&lt;p&gt;The Pickle module has many pitfalls. One of them is the fact that Pickled data
+is meant to run on only the same Python version, and while it might sometimes
+work on different versions (Pickle has a notion of a protocol version) its
+interoperability leaves some things to be desired&lt;/p&gt;
+&lt;p&gt;More damning is the fact that loading Pickled data allows for arbitrary code
+execution. If you load Pickled data from sources you cannot trust, and really
+can you ever? It is woeful. This combined with the fact that a serialization
+format has interoperability issues should be enough to steer well clear of it.&lt;/p&gt;
+&lt;p&gt;See the following example of unpickling some data, causing it to print
+&lt;tt class="docutils literal"&gt;hello&lt;/tt&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pickle&lt;/span&gt;
+
+&lt;span class="n"&gt;pickle&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;b&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\x80\x03&lt;/span&gt;&lt;span class="s1"&gt;cbuiltins&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;print&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;q&lt;/span&gt;&lt;span class="se"&gt;\x00&lt;/span&gt;&lt;span class="s1"&gt;X&lt;/span&gt;&lt;span class="se"&gt;\x05\x00\x00\x00&lt;/span&gt;&lt;span class="s1"&gt;helloq&lt;/span&gt;&lt;span class="se"&gt;\x01\x85&lt;/span&gt;&lt;span class="s1"&gt;q&lt;/span&gt;&lt;span class="se"&gt;\x02&lt;/span&gt;&lt;span class="s1"&gt;Rq&lt;/span&gt;&lt;span class="se"&gt;\x03&lt;/span&gt;&lt;span class="s1"&gt;.&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# hello&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you do ever need to exchange data use a format that does not allow for any
+smart things. A good option is to use JSON, which is available in the standard
+library. You would need to write some code to explicitly convert your objects
+to a format you are happy with, and some code to explicitly convert some
+serialized data back to your objects.&lt;/p&gt;
+&lt;p&gt;There are libraries to help you with this such as &lt;a class="reference external" href="https://marshmallow.readthedocs.io/"&gt;marshmallow&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="os-system-subprocess"&gt;
+&lt;h2&gt;os.system, subprocess&lt;/h2&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;os.system&lt;/tt&gt; is inherently not safe with any user input and is likely not a
+function you want to ever use due to its working. You would want to use the
+&lt;tt class="docutils literal"&gt;subprocess.*&lt;/tt&gt; functions and those come with a &lt;a class="reference external" href="https://supakeen.com/weblog/0x01.html"&gt;manual&lt;/a&gt; to use securely.&lt;/p&gt;
+&lt;p&gt;Seriously scrutinize any use of these classes of functions as they lead to
+mistakes, most of which are easy to turn against you.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="shlex"&gt;
+&lt;h2&gt;shlex&lt;/h2&gt;
+&lt;p&gt;&lt;a class="reference external" href="https://docs.python.org/3/library/shlex.html#module-shlex"&gt;shlex&lt;/a&gt; was a suggestion of mine in one of my previous articles. It is however
+commonly used improperly. Consider if the following is the splitting you want:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;shlex&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
+
+&lt;span class="n"&gt;user_input&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;shlex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo;echo${IFS}hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;echo {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# b&amp;#39;foo\nhello\n&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The above shows a mismatch between what shlex thinks are separators for a shell
+and what the actual outcome is. Someone slightly familiar with shlex might
+assume that a shlex split always makes sure only a single argument is possible.&lt;/p&gt;
+&lt;p&gt;shlex can give a false sense of security if you are not absolutely certain you
+know how shells work and what is in your input. Since you can never be certain
+of the latter you should prefer to work around having to use it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="re"&gt;
+&lt;h2&gt;re&lt;/h2&gt;
+&lt;p&gt;Regular expressions, you think you know them and now you have two problems.
+While a powerful language that likely doesn't lead to direct exploitation one
+does have to take care when writing these.&lt;/p&gt;
+&lt;p&gt;A possible attack is a denial of service by turning your own regular
+expressions against you. Note the timings below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;{}!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="mf"&gt;1.4856852590019116&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;{}!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="mf"&gt;40.852224354999635&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="xml"&gt;
+&lt;h2&gt;xml&lt;/h2&gt;
+&lt;p&gt;XML, or eXtensible Markup Language is a format commonly (or less commonly
+in current times) used to exchange data between different systems or for
+general data serialization. XML is extremely flexible with a lot of knobs, this
+has also led to a large amount of flaws possible in certain implementations.&lt;/p&gt;
+&lt;p&gt;This is well documented at the Python documentation website on &lt;a class="reference external" href="https://docs.python.org/3/library/xml.html#module-xml"&gt;xml&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The excellent &lt;a class="reference external" href="https://pypi.org/project/defusedxml/"&gt;defusedxml&lt;/a&gt; package written by Christian Heimes has an amazing
+README explaining all the issues, and has patches to make the standard Python
+libraries and some other libraries less vulnerable. Read the description on
+PyPI.&lt;/p&gt;
+&lt;p&gt;Any use of the built-in xml libraries should be scrutinized and where possible
+be replaced with &lt;a class="reference external" href="https://lxml.de/"&gt;lxml&lt;/a&gt;. lxml is a binding to libxml2 which comes with generally
+secure defaults and a network sandbox.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="random"&gt;
+&lt;h2&gt;random&lt;/h2&gt;
+&lt;p&gt;The default &lt;a class="reference internal" href="#random"&gt;random&lt;/a&gt; module in Python will use a predictable random number
+generator. If you use it for anything that is supposed to be secret please
+use &lt;tt class="docutils literal"&gt;random.SecureRandom()&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;It is a good idea to always use SecureRandom unless you are certain you don't
+need it instead of assuming the reverse.&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="python"></category><category term="stdlib"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/0x01.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
 on. Some of them inherently unsafe, some of them safe in nature but easy to
 use in an unsafe way.&lt;/p&gt;

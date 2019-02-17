@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2019-01-16T12:00:00+01:00</updated><entry><title>Python dangers in the standard library</title><link href="https://supakeen.com/weblog/0x03.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/0x03.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2019-01-16T12:00:00+01:00</updated><entry><title>Dangers in Python's standard library</title><link href="https://supakeen.com/weblog/0x03.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/0x03.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;The Python programming language comes with &amp;quot;Batteries Included&amp;quot;. A philosophy
 to have a large and immediately useful standard library. However, since the
 standard library comes with Python it is hard to refactor for older code
@@ -26,7 +26,7 @@ work on different versions (Pickle has a notion of a protocol version) its
 interoperability leaves some things to be desired&lt;/p&gt;
 &lt;p&gt;More damning is the fact that loading Pickled data allows for arbitrary code
 execution. If you load Pickled data from sources you cannot trust, and really
-can you ever, it is woeful. This combined with the fact that a serialization
+can you ever? It is woeful. This combined with the fact that a serialization
 format has interoperability issues should be enough to steer well clear of it.&lt;/p&gt;
 &lt;p&gt;See the following example of unpickling some data, causing it to print
 &lt;tt class="docutils literal"&gt;hello&lt;/tt&gt;.&lt;/p&gt;
@@ -49,7 +49,7 @@ serialized data back to your objects.&lt;/p&gt;
 function you want to ever use due to its working. You would want to use the
 &lt;tt class="docutils literal"&gt;subprocess.*&lt;/tt&gt; functions and those come with a &lt;a class="reference external" href="https://supakeen.com/weblog/0x01.html"&gt;manual&lt;/a&gt; to use securely.&lt;/p&gt;
 &lt;p&gt;Seriously scrutinize any use of these classes of functions as they lead to
-some of the easiest to turn against you mistakes.&lt;/p&gt;
+mistakes, most of which are easy to turn against you.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="shlex"&gt;
 &lt;h2&gt;shlex&lt;/h2&gt;
@@ -107,7 +107,7 @@ use &lt;tt class="docutils literal"&gt;random.SecureRandom()&lt;/tt&gt;.&lt;/p&g
 &lt;p&gt;It is a good idea to always use SecureRandom unless you are certain you don't
 need it instead of assuming the reverse.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category></entry><entry><title>Upgrading a reverse shell?</title><link href="https://supakeen.com/weblog/0x02.html" rel="alternate"></link><published>2018-09-08T12:00:00+02:00</published><updated>2018-09-08T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-09-08:/weblog/0x02.html</id><summary type="html">&lt;p class="first last"&gt;Some notes on gaining and upgrading reverse shells.&lt;/p&gt;
+</content><category term="python"></category><category term="stdlib"></category></entry><entry><title>Upgrading a reverse shell?</title><link href="https://supakeen.com/weblog/0x02.html" rel="alternate"></link><published>2018-09-08T12:00:00+02:00</published><updated>2018-09-08T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-09-08:/weblog/0x02.html</id><summary type="html">&lt;p class="first last"&gt;Some notes on gaining and upgrading reverse shells.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;You've found a reverse shell but it's not behaving like a proper shell. You
 can't run &lt;cite&gt;su&lt;/cite&gt; because it requires a tty and you might not have a prompt. This
 is my quick summary on my notes on upgrading a reverse shell to something

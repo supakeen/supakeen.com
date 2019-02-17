@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Python dangers in the standard library</title>
+        <title>Dangers in Python's standard library</title>
         <link rel="shortcut icon" type="image/icon" href="theme/images/favicon.ico"/>
         <link rel="stylesheet" href="./theme/css/main.css" />
         <link href="https://supakeen.com/weblog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="supakeen Atom Feed" />
@@ -14,7 +14,7 @@
         </header>
 <section>
     <article>
-        <h1>Python dangers in the standard library</h1>
+        <h1>Dangers in Python's standard library</h1>
         <p>The Python programming language comes with &quot;Batteries Included&quot;. A philosophy
 to have a large and immediately useful standard library. However, since the
 standard library comes with Python it is hard to refactor for older code
@@ -41,7 +41,7 @@ work on different versions (Pickle has a notion of a protocol version) its
 interoperability leaves some things to be desired</p>
 <p>More damning is the fact that loading Pickled data allows for arbitrary code
 execution. If you load Pickled data from sources you cannot trust, and really
-can you ever, it is woeful. This combined with the fact that a serialization
+can you ever? It is woeful. This combined with the fact that a serialization
 format has interoperability issues should be enough to steer well clear of it.</p>
 <p>See the following example of unpickling some data, causing it to print
 <tt class="docutils literal">hello</tt>.</p>
@@ -64,7 +64,7 @@ serialized data back to your objects.</p>
 function you want to ever use due to its working. You would want to use the
 <tt class="docutils literal">subprocess.*</tt> functions and those come with a <a class="reference external" href="https://supakeen.com/weblog/0x01.html">manual</a> to use securely.</p>
 <p>Seriously scrutinize any use of these classes of functions as they lead to
-some of the easiest to turn against you mistakes.</p>
+mistakes, most of which are easy to turn against you.</p>
 </div>
 <div class="section" id="shlex">
 <h2>shlex</h2>
