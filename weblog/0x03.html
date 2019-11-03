@@ -16,17 +16,17 @@
     <article>
         <h1>Dangers in Python's standard library</h1>
         <p>The Python programming language comes with &quot;Batteries Included&quot;. A philosophy
-to have a large and immediately useful standard library. However, since the
+to ship a comprehensive, immediately-useful standard library. However, since the
 standard library comes with Python it is hard to refactor for older code
-depends on it. Because of this the standard library can in many cases be quite
+depends on it. Because of this the standard library can in many cases lag quite
 far behind what is available in the ecosystem as a whole.</p>
 <p>Some of the Python standard library is downright dangerous. By dangerous I mean
 that special care has to be taken when using certain functions. This article
-highlights some of the more well known issues with the standard library but is
-by no means a comprehensive list of everything that can go wrong nor a claim
+highlights some of the more well-known issues with the standard library, but is
+by no means a comprehensive list of everything that can go wrong, nor a claim
 that the Python standard library is bad.</p>
-<p>This article is only about modules in the standard library, dangerous syntax,
-types, and other language abilities are saved for another day. As always pay
+<p>This article is only about modules in the standard library; dangerous syntax,
+types, and other language abilities are saved for another day. As always, pay
 attention and try to think 'what does this actually do and can it be used in
 a different way'.</p>
 <p>Don't consider this to be a definitive list at any point in time. The initial
@@ -38,11 +38,12 @@ often used when someone needs an easy way to send an objects' state elsewhere.</
 <p>The Pickle module has many pitfalls. One of them is the fact that Pickled data
 is meant to run on only the same Python version, and while it might sometimes
 work on different versions (Pickle has a notion of a protocol version) its
-interoperability leaves some things to be desired</p>
+interoperability leaves some things to be desired.</p>
 <p>More damning is the fact that loading Pickled data allows for arbitrary code
-execution. If you load Pickled data from sources you cannot trust, and really
-can you ever? It is woeful. This combined with the fact that a serialization
-format has interoperability issues should be enough to steer well clear of it.</p>
+execution. If you load Pickled data from sources you cannot trust -- something
+much harder to guarantee than it might seem -- it is woeful. This combined
+with the fact that a serialization format has interoperability issues should be
+enough to steer well clear of it.</p>
 <p>See the following example of unpickling some data, causing it to print
 <tt class="docutils literal">hello</tt>.</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
@@ -51,8 +52,8 @@ format has interoperability issues should be enough to steer well clear of it.</
 
 <span class="c1"># hello</span>
 </pre></div>
-<p>If you do ever need to exchange data use a format that does not allow for any
-smart things. A good option is to use JSON, which is available in the standard
+<p>If you do ever need to exchange data, use a format that does not allow for any
+'clever' things. A good option is to use JSON, which is available in the standard
 library. You would need to write some code to explicitly convert your objects
 to a format you are happy with, and some code to explicitly convert some
 serialized data back to your objects.</p>
@@ -80,11 +81,11 @@ commonly used improperly. Consider if the following is the splitting you want:</
 <span class="c1"># b&#39;foo\nhello\n&#39;</span>
 </pre></div>
 <p>The above shows a mismatch between what shlex thinks are separators for a shell
-and what the actual outcome is. Someone slightly familiar with shlex might
+and what the actual outcome is. Someone less familiar with shlex might
 assume that a shlex split always makes sure only a single argument is possible.</p>
 <p>shlex can give a false sense of security if you are not absolutely certain you
 know how shells work and what is in your input. Since you can never be certain
-of the latter you should prefer to work around having to use it.</p>
+of the latter, you should prefer to work around having to use it.</p>
 </div>
 <div class="section" id="re">
 <h2>re</h2>
@@ -118,9 +119,9 @@ secure defaults and a network sandbox.</p>
 <h2>random</h2>
 <p>The default <a class="reference internal" href="#random">random</a> module in Python will use a predictable random number
 generator. If you use it for anything that is supposed to be secret please
-use <tt class="docutils literal">random.SecureRandom()</tt>.</p>
+use the <tt class="docutils literal">secrets</tt> module or <tt class="docutils literal">random.SystemRandom()</tt>.</p>
 <p>It is a good idea to always use SecureRandom unless you are certain you don't
-need it instead of assuming the reverse.</p>
+need it, instead of assuming the reverse.</p>
 </div>
 
     </article>
