@@ -117,11 +117,11 @@ secure defaults and a network sandbox.</p>
 </div>
 <div class="section" id="random">
 <h2>random</h2>
-<p>The default <a class="reference internal" href="#random">random</a> module in Python will use a predictable random number
+<p>The default <a class="reference external" href="https://docs.python.org/3/library/random.html">random</a> module in Python will use a predictable random number
 generator. If you use it for anything that is supposed to be secret please
-use the <tt class="docutils literal">secrets</tt> module or <tt class="docutils literal">random.SystemRandom()</tt>.</p>
-<p>It is a good idea to always use SecureRandom unless you are certain you don't
-need it, instead of assuming the reverse.</p>
+use the <a class="reference external" href="https://docs.python.org/3/library/secrets.html">secrets</a> module or <tt class="docutils literal">random.SystemRandom()</tt>.</p>
+<p>It is a good idea to always use <tt class="docutils literal">secrets</tt> or <tt class="docutils literal">SystemRandom</tt> unless you are
+certain you don't need it, instead of assuming the reverse.</p>
 </div>
 
     </article>

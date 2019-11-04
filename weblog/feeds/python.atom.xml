@@ -102,11 +102,11 @@ secure defaults and a network sandbox.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="random"&gt;
 &lt;h2&gt;random&lt;/h2&gt;
-&lt;p&gt;The default &lt;a class="reference internal" href="#random"&gt;random&lt;/a&gt; module in Python will use a predictable random number
+&lt;p&gt;The default &lt;a class="reference external" href="https://docs.python.org/3/library/random.html"&gt;random&lt;/a&gt; module in Python will use a predictable random number
 generator. If you use it for anything that is supposed to be secret please
-use the &lt;tt class="docutils literal"&gt;secrets&lt;/tt&gt; module or &lt;tt class="docutils literal"&gt;random.SystemRandom()&lt;/tt&gt;.&lt;/p&gt;
-&lt;p&gt;It is a good idea to always use SecureRandom unless you are certain you don't
-need it, instead of assuming the reverse.&lt;/p&gt;
+use the &lt;a class="reference external" href="https://docs.python.org/3/library/secrets.html"&gt;secrets&lt;/a&gt; module or &lt;tt class="docutils literal"&gt;random.SystemRandom()&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;It is a good idea to always use &lt;tt class="docutils literal"&gt;secrets&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;SystemRandom&lt;/tt&gt; unless you are
+certain you don't need it, instead of assuming the reverse.&lt;/p&gt;
 &lt;/div&gt;
 </content><category term="python"></category><category term="stdlib"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/0x01.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
