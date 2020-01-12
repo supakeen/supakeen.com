@@ -5,7 +5,7 @@ Creole
 ======
 
 Stews
-=====
+-----
 
 * :ref:`jambalaya`
 * :ref:`rougail_saucisse`
