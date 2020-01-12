@@ -1,8 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2019-01-16T12:00:00+01:00</updated><entry><title>Dangers in Python's standard library</title><link href="https://supakeen.com/weblog/0x03.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/0x03.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-01-12T12:00:00+01:00</updated><entry><title>The plans for 2020</title><link href="https://supakeen.com/weblog/0x04.html" rel="alternate"></link><published>2020-01-12T12:00:00+01:00</published><updated>2020-01-12T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-01-12:/weblog/0x04.html</id><summary type="html">&lt;p class="first last"&gt;Stuff I'll be working on in 2020.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;Not quite the blog post I'd normally write. This one is mostly for me to have
+a look at every now and then and see if I'm achieving what I want to do. A
+very long New Years resolution!&lt;/p&gt;
+&lt;p&gt;For 2020 I'd like to extend the &lt;a class="reference external" href="https://supakeen.com"&gt;supakeen.com&lt;/a&gt; domain quite a bit. Fashioning
+it like the olden homepages back when not everything was hosted on social
+networks and the like. I'll be adding my &lt;a class="reference external" href="https://supakeen.com/notes"&gt;notes&lt;/a&gt; on technical things and a
+&lt;a class="reference external" href="https://supakeen.com/recipes"&gt;recipes&lt;/a&gt; section to this website.&lt;/p&gt;
+&lt;p&gt;Since I also build the &lt;a class="reference external" href="https://supakeen.com/project/gb"&gt;gb&lt;/a&gt; project I've decided to make all this content
+available over Gopher as well. That'll make sure I have to keep working on
+making &lt;a class="reference external" href="https://supakeen.com/project/gb"&gt;gb&lt;/a&gt; the best gopher server out there.&lt;/p&gt;
+&lt;p&gt;Aside from that I'm looking into setting up a small FTP server as well where
+my content can be downloaded. In case you want to archive this website.&lt;/p&gt;
+&lt;p&gt;For &lt;a class="reference external" href="https://supakeen.com/project/pinnwand"&gt;pinnwand&lt;/a&gt; you'll see the biggest changes in the shortest amount of time. A
+branch containing multi-file pastes is almost ready to go. This will allow
+users to paste multiple files in one go through the web interface or API if
+they want. There will probably be room to create a small &lt;a class="reference external" href="https://supakeen.com/project/pinnwand"&gt;pinnwand&lt;/a&gt; client
+project if I can think of a good name.&lt;/p&gt;
+&lt;p&gt;The &lt;a class="reference external" href="https://supakeen.com/project/unchaind"&gt;unchaind&lt;/a&gt; project will stay dead as I no longer play the game. I'm thinking
+of archiving it but I'll have to talk to other contributors first.&lt;/p&gt;
+&lt;p&gt;That's it for 2020, keeping the plans small means they're hopefully more
+achievable.&lt;/p&gt;
+&lt;p&gt;A stretch goal would be to add a book review section, as if!&lt;/p&gt;
+</content><category term="python"></category><category term="life"></category></entry><entry><title>Dangers in Python's standard library</title><link href="https://supakeen.com/weblog/0x03.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/0x03.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;The Python programming language comes with &amp;quot;Batteries Included&amp;quot;. A philosophy
-to ship a comprehensive, immediately-useful standard library. However, since the
-standard library comes with Python it is hard to refactor for older code
+to ship a comprehensive, immediately-useful standard library. However, since
+the standard library comes with Python it is hard to refactor for older code
 depends on it. Because of this the standard library can in many cases lag quite
 far behind what is available in the ecosystem as a whole.&lt;/p&gt;
 &lt;p&gt;Some of the Python standard library is downright dangerous. By dangerous I mean
@@ -59,9 +82,9 @@ commonly used improperly. Consider if the following is the splitting you want:&l
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;shlex&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
 
-&lt;span class="n"&gt;user_input&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;shlex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo;echo${IFS}hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;echo {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;user_input&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;shlex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo;echo$&lt;/span&gt;&lt;span class="si"&gt;{IFS}&lt;/span&gt;&lt;span class="s2"&gt;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;echo &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c1"&gt;# b&amp;#39;foo\nhello\n&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -79,9 +102,9 @@ While a powerful language that likely doesn't lead to direct exploitation one
 does have to take care when writing these.&lt;/p&gt;
 &lt;p&gt;A possible attack is a denial of service by turning your own regular
 expressions against you. Note the timings below.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;{}!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="mf"&gt;1.4856852590019116&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;{}!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="mf"&gt;40.852224354999635&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -108,7 +131,7 @@ use the &lt;a class="reference external" href="https://docs.python.org/3/library
 &lt;p&gt;It is a good idea to always use &lt;tt class="docutils literal"&gt;secrets&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;SystemRandom&lt;/tt&gt; unless you are
 certain you don't need it, instead of assuming the reverse.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="stdlib"></category></entry><entry><title>Upgrading a reverse shell?</title><link href="https://supakeen.com/weblog/0x02.html" rel="alternate"></link><published>2018-09-08T12:00:00+02:00</published><updated>2018-09-08T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-09-08:/weblog/0x02.html</id><summary type="html">&lt;p class="first last"&gt;Some notes on gaining and upgrading reverse shells.&lt;/p&gt;
+</content><category term="python"></category><category term="python"></category><category term="stdlib"></category></entry><entry><title>Upgrading a reverse shell?</title><link href="https://supakeen.com/weblog/0x02.html" rel="alternate"></link><published>2018-09-08T12:00:00+02:00</published><updated>2018-09-08T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-09-08:/weblog/0x02.html</id><summary type="html">&lt;p class="first last"&gt;Some notes on gaining and upgrading reverse shells.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;You've found a reverse shell but it's not behaving like a proper shell. You
 can't run &lt;cite&gt;su&lt;/cite&gt; because it requires a tty and you might not have a prompt. This
 is my quick summary on my notes on upgrading a reverse shell to something
@@ -127,7 +150,7 @@ script.&lt;/p&gt;
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PingAsAService&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tornado&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RequestHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_query_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;host&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ping {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ping &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ping&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 
@@ -156,9 +179,9 @@ BSD and GNU nc.&lt;/p&gt;
 &lt;div class="section" id="open-three-terminals"&gt;
 &lt;h2&gt;Open three terminals.&lt;/h2&gt;
 &lt;p&gt;In one terminal where you don't run a terminal multipler setup your &lt;cite&gt;nc&lt;/cite&gt; to
-listen to a port. It is important that you don't run a terminal multiplexer such
-as &lt;cite&gt;screen&lt;/cite&gt; or &lt;cite&gt;tmux&lt;/cite&gt; because we will be adjusting the terminal settings and
-the mux will interfere.&lt;/p&gt;
+listen to a port. It is important that you don't run a terminal multiplexer
+such as &lt;cite&gt;screen&lt;/cite&gt; or &lt;cite&gt;tmux&lt;/cite&gt; because we will be adjusting the terminal settings
+and the mux will interfere.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;% nc -lv 4242
 Listening on [0.0.0.0] (family 0, port 4242)
 &lt;/pre&gt;&lt;/div&gt;
@@ -216,8 +239,8 @@ Password: asdf
 
 su: Authentication failure
 &lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Our shell gained a pty and with it a fancy prompt but everything we type is being
-output and sadly using &lt;cite&gt;ctrl+c&lt;/cite&gt; still exits our nc. Not the process on the
+&lt;p&gt;Our shell gained a pty and with it a fancy prompt but everything we type is
+being output and sadly using &lt;cite&gt;ctrl+c&lt;/cite&gt; still exits our nc. Not the process on the
 remote.&lt;/p&gt;
 &lt;p&gt;To fix this we're going to tell our own terminal to not interpret any command
 sequences anymore.&lt;/p&gt;
@@ -252,7 +275,7 @@ be.&lt;/p&gt;
 functional reverse shell. You can run tmux or screen, or any other application
 your heart desires.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="shell"></category><category term="tty"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/0x01.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
+</content><category term="hack"></category><category term="shell"></category><category term="tty"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/0x01.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
 on. Some of them inherently unsafe, some of them safe in nature but easy to
 use in an unsafe way.&lt;/p&gt;
@@ -275,7 +298,7 @@ to restart services. To do that it uses a function to execute commands called
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
-&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we call our program with &lt;cite&gt;python service.py nginx&lt;/cite&gt; the string that gets put
 into our &lt;cite&gt;os.system&lt;/cite&gt;-call will be the string &lt;cite&gt;systemctl restart nginx&lt;/cite&gt; and all
@@ -397,4 +420,4 @@ rules for shells. Specifically you could try to use &lt;cite&gt;shlex.quote&lt;/
 you fill in. Reasoning about what is 'safe' or 'unsafe' becomes very difficult in
 this context.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="subprocess"></category></entry></feed>
+</content><category term="python"></category><category term="python"></category><category term="subprocess"></category></entry></feed>

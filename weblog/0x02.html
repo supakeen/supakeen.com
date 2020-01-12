@@ -33,7 +33,7 @@ script.</p>
 <span class="k">class</span> <span class="nc">PingAsAService</span><span class="p">(</span><span class="n">tornado</span><span class="o">.</span><span class="n">web</span><span class="o">.</span><span class="n">RequestHandler</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_query_argument</span><span class="p">(</span><span class="s2">&quot;host&quot;</span><span class="p">)</span>
-        <span class="n">ping</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s2">&quot;ping {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">),</span> <span class="n">shell</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">ping</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span><span class="s2">&quot;ping </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host</span><span class="p">),</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ping</span><span class="p">)</span>
 
 
@@ -62,9 +62,9 @@ BSD and GNU nc.</p>
 <div class="section" id="open-three-terminals">
 <h2>Open three terminals.</h2>
 <p>In one terminal where you don't run a terminal multipler setup your <cite>nc</cite> to
-listen to a port. It is important that you don't run a terminal multiplexer such
-as <cite>screen</cite> or <cite>tmux</cite> because we will be adjusting the terminal settings and
-the mux will interfere.</p>
+listen to a port. It is important that you don't run a terminal multiplexer
+such as <cite>screen</cite> or <cite>tmux</cite> because we will be adjusting the terminal settings
+and the mux will interfere.</p>
 <div class="highlight"><pre><span></span>% nc -lv 4242
 Listening on [0.0.0.0] (family 0, port 4242)
 </pre></div>
@@ -122,8 +122,8 @@ Password: asdf
 
 su: Authentication failure
 </pre></div>
-<p>Our shell gained a pty and with it a fancy prompt but everything we type is being
-output and sadly using <cite>ctrl+c</cite> still exits our nc. Not the process on the
+<p>Our shell gained a pty and with it a fancy prompt but everything we type is
+being output and sadly using <cite>ctrl+c</cite> still exits our nc. Not the process on the
 remote.</p>
 <p>To fix this we're going to tell our own terminal to not interpret any command
 sequences anymore.</p>
