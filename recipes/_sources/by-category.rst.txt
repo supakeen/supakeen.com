@@ -4,4 +4,4 @@ By Category
 Sauces
 ======
 
-* sambal_badjak_
+* :ref:`sambal_badjak`
