@@ -1,0 +1,4 @@
+.. _jambalaya:
+
+Jambalaya
+#########
