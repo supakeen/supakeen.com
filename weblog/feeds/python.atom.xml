@@ -1,28 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-01-12T12:00:00+01:00</updated><entry><title>The plans for 2020</title><link href="https://supakeen.com/weblog/0x04.html" rel="alternate"></link><published>2020-01-12T12:00:00+01:00</published><updated>2020-01-12T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-01-12:/weblog/0x04.html</id><summary type="html">&lt;p class="first last"&gt;Stuff I'll be working on in 2020.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Not quite the blog post I'd normally write. This one is mostly for me to have
-a look at every now and then and see if I'm achieving what I want to do. A
-very long New Years resolution!&lt;/p&gt;
-&lt;p&gt;For 2020 I'd like to extend the &lt;a class="reference external" href="https://supakeen.com"&gt;supakeen.com&lt;/a&gt; domain quite a bit. Fashioning
-it like the olden homepages back when not everything was hosted on social
-networks and the like. I'll be adding my &lt;a class="reference external" href="https://supakeen.com/notes"&gt;notes&lt;/a&gt; on technical things and a
-&lt;a class="reference external" href="https://supakeen.com/recipes"&gt;recipes&lt;/a&gt; section to this website.&lt;/p&gt;
-&lt;p&gt;Since I also build the &lt;a class="reference external" href="https://supakeen.com/project/gb"&gt;gb&lt;/a&gt; project I've decided to make all this content
-available over Gopher as well. That'll make sure I have to keep working on
-making &lt;a class="reference external" href="https://supakeen.com/project/gb"&gt;gb&lt;/a&gt; the best gopher server out there.&lt;/p&gt;
-&lt;p&gt;Aside from that I'm looking into setting up a small FTP server as well where
-my content can be downloaded. In case you want to archive this website.&lt;/p&gt;
-&lt;p&gt;For &lt;a class="reference external" href="https://supakeen.com/project/pinnwand"&gt;pinnwand&lt;/a&gt; you'll see the biggest changes in the shortest amount of time. A
-branch containing multi-file pastes is almost ready to go. This will allow
-users to paste multiple files in one go through the web interface or API if
-they want. There will probably be room to create a small &lt;a class="reference external" href="https://supakeen.com/project/pinnwand"&gt;pinnwand&lt;/a&gt; client
-project if I can think of a good name.&lt;/p&gt;
-&lt;p&gt;The &lt;a class="reference external" href="https://supakeen.com/project/unchaind"&gt;unchaind&lt;/a&gt; project will stay dead as I no longer play the game. I'm thinking
-of archiving it but I'll have to talk to other contributors first.&lt;/p&gt;
-&lt;p&gt;That's it for 2020, keeping the plans small means they're hopefully more
-achievable.&lt;/p&gt;
-&lt;p&gt;A stretch goal would be to add a book review section, as if!&lt;/p&gt;
-</content><category term="python"></category><category term="life"></category></entry><entry><title>Dangers in Python's standard library</title><link href="https://supakeen.com/weblog/0x03.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/0x03.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2019-01-16T12:00:00+01:00</updated><entry><title>Dangers in Python's standard library</title><link href="https://supakeen.com/weblog/dangers-in-pythons-standard-library.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/dangers-in-pythons-standard-library.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;The Python programming language comes with &amp;quot;Batteries Included&amp;quot;. A philosophy
 to ship a comprehensive, immediately-useful standard library. However, since
 the standard library comes with Python it is hard to refactor for older code
@@ -131,7 +108,7 @@ use the &lt;a class="reference external" href="https://docs.python.org/3/library
 &lt;p&gt;It is a good idea to always use &lt;tt class="docutils literal"&gt;secrets&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;SystemRandom&lt;/tt&gt; unless you are
 certain you don't need it, instead of assuming the reverse.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="python"></category><category term="stdlib"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/0x01.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/0x01.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
+</content><category term="python"></category><category term="python"></category><category term="stdlib"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/executing-commands-safely-from-python.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/executing-commands-safely-from-python.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
 on. Some of them inherently unsafe, some of them safe in nature but easy to
 use in an unsafe way.&lt;/p&gt;
