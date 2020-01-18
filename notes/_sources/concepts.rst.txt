@@ -3,7 +3,7 @@ Concepts
 
 Asynchronous I/O
 ================
-While I have an entire page dedicated to my notes on asynchrony_ the
+While I have an entire page dedicated to my notes on :ref:`asynchrony` the
 concept of Asynchronous I/O can be explained shortly.
 
 Computers often have to wait for things and while waiting they could be doing
@@ -87,6 +87,10 @@ does.
 
 Trade-offs
 ==========
+When you exchange one thing for another you're making a trade off. The most
+commonly seen one is the time/space tradeoff which means you're trading some
+space (for example, disk or memory usage) for being faster. Or you can use
+less space and be a bit slower.
 
 .. _ASCII: https://en.wikipedia.org/wiki/ASCII
 .. _Unicode: https://home.unicode.org/basic-info/faq/

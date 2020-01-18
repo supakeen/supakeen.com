@@ -1,5 +1,5 @@
-supakeen
-========
+supakeen's notes
+================
 
 My notes on things I encounter. I use these notes because writing things down
 makes it easier for me to remember. Writing things down has the added advantage

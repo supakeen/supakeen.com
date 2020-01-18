@@ -1,8 +1,12 @@
 Algorithms
 ##########
+Some short descriptions of common algorithms.
 
 Pathfinding
 ===========
+A common subject in computer science which also makes its entry into the day
+to day of plenty of programmers is path finding. You might have a graph and
+want to find the fastest route.
 
 A*
 --
@@ -12,3 +16,6 @@ Breath First Search
 
 Depth First Search
 ------------------
+
+Dijkstra
+--------
