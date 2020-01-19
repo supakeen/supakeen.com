@@ -1,5 +1,5 @@
-supakeen
-========
+supakeen's recipes
+==================
 
 My recipes that I enjoy making. Usually created based on other recipes.
 If I am unsure of a certain recipe because I've bastardized it way beyond
