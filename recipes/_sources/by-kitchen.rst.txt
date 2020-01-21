@@ -1,11 +1,14 @@
 By Kitchen
 ##########
 
+Colombian
+=========
+
+* :ref:`arepa`
+* :ref:`reina_pepiada`
+
 Creole
 ======
-
-Stews
------
 
 * :ref:`jambalaya`
 * :ref:`rougail_saucisse`
@@ -13,17 +16,16 @@ Stews
 Italian
 =======
 
-Sauces
-------
-
 * :ref:`supa_tomato`
 
 Indonesian
 ==========
 
-Sauces
-------
-
 * :ref:`sambal_badjak`
 
+Venezuelan
+==========
+
+* :ref:`arepa`
+* :ref:`reina_pepiada`
 

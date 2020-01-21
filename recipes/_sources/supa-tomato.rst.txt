@@ -6,7 +6,7 @@ A bastardized version of a red tomato sauce for pasta dishes. Very meat heavy!
 This is a true comfort sauce and not to be used if you're skimping calories.
 
 Ingredients
------------
+===========
 * olive oil
 * bay leaf
 * black pepper
@@ -22,16 +22,20 @@ Ingredients
 * any other vegetables you like, carrots go great with this
 
 Preparation
------------
+===========
 Start by cutting up all the vegetables. They need to be diced finely but don't
 use a mixer, you won't learn any knife skills and odds are you'll end up with a
 mush. Aim for blocks about 2-3mm on all sides.
+
+Put the sliced vegetables in separate containers depending on if they're hard
+or soft not by the touch but by the time they need to cook to be soft, carrots
+take longer than onions.
 
 Get a large pan ready to cook, the type of pan doesn't matter all that much
 but I prefer a dutch oven if you have one. If not any sauce pan will do.
 
 Cooking
--------
+=======
 Put some oil in the pan and wait for it to start glimmering then start adding
 vegetables. You should start with the hardest vegetables and wait for them to
 soften up a bit. In this case start with the fennel, then the onions, and leek.
@@ -53,3 +57,8 @@ again. Let it all simmer for as long as you can endure but at the very least
 until most of the liquid has evaporated and a sauce mixture has formed.
 
 Ready to serve with some pasta, don't forget cheese!
+
+Photos
+======
+
+.. image:: _static/supatomato0.jpg
