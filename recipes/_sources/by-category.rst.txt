@@ -1,6 +1,16 @@
 By Category
 ###########
 
+Fillings
+========
+
+* :ref:`reina_pepiada`
+
+Pastry
+======
+
+* :ref:`arepa`
+
 Sauces
 ======
 
