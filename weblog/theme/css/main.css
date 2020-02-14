@@ -23,15 +23,17 @@
 }
 
 html {
-    background: linear-gradient(to bottom, #333, #111);
+    background-color: #222;
     background-attachment: fixed;
     color: #54fc54;
     min-height: 100%;
 }
 
 body {
-    width: 600px;
-    margin: 2em auto;
+    min-width: 600px;
+    max-width: 980px;
+    margin: 2rem auto;
+    padding: 0 2rem;
 }
 
 h1, h2, h3 {
@@ -43,6 +45,7 @@ header h1 {
     font-size: 3rem;
     padding-bottom: 1rem;
     border-bottom: .5rem solid #54fc54;
+    margin: 2rem 1rem;
 }
 
 header h1 a {
@@ -68,9 +71,13 @@ p, ul, footer {
     line-height: 1.5rem;
 }
 
+p {
+    margin: 1rem;
+}
+
 ul {
     padding: 0;
-    margin: 0;
+    margin: 0 1rem;
     list-style: none;
 }
 
@@ -97,7 +104,7 @@ img {
 }
 
 a {
-color: #54fc54;
+    color: #54fc54;
     text-decoration: underline;
 }
 
@@ -115,6 +122,8 @@ code, cite {
 }
 
 footer {
+    margin: 2rem 1rem;
+    border-top: .5rem solid #54fc54;
     text-align: center;
 }
 
@@ -123,15 +132,18 @@ footer p {
 }
 
 blockquote {
-    box-sizing: border-box;
-    background: #fff;
-    border: 10px solid lightblue;
-    padding: 16px 16px 16px 128px;
-    margin: 0 0 0 -26px;
-    width: 712px;
-    color: #000;
     font-family: "Keen 4";
-    font-size: 16px;
-    font-weight: bold;
-    min-height: 128px;
+    background: #fefefe;
+    color: #333;
+    padding: 2rem 2rem 2rem 12rem;
+    border: 1rem solid #3ea8a7;
+    margin: 0;
+    background-image: url("../images/keen1.png");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    height: 165px;
+    display: table-cell;
+    vertical-align: middle;
+    width: 9999px;
+    position: relative;
 }
