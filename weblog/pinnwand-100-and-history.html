@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Pinnwand 1.0.0 and its history</title>
+        <link rel="shortcut icon" type="image/icon" href="theme/images/favicon.ico"/>
+        <link rel="stylesheet" href="./theme/css/main.css" />
+        <link rel="stylesheet" href="./theme/css/pygments.css" />
+        <link href="https://supakeen.com/weblog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="supakeen's weblog Atom Feed" />
+    </head>
+
+    <body>
+        <header>
+            <h1><a href="./">supakeen's weblog </a></h1>
+        </header>
+<section>
+    <article>
+        <h1>Pinnwand 1.0.0 and its history</h1>
+        <p><a class="reference external" href="https://supakeen.com/project/pinnwand/">pinnwand</a> 1.0.0 was released and shortly thereafter followed by the customary
+1.0.1 release to fix that one bug that always gets discovered just after
+release. You can download these from <a class="reference external" href="https://pypi.org/project/pinnwand/">PyPI</a>.</p>
+<p>The major features that have been added to the pinnwand 1.0 release are:</p>
+<ul class="simple">
+<li>multi-file pastes, pastes can now contain multiple files</li>
+<li>shorter URLs, paste IDs are now more readable and less typo prone</li>
+<li>pinnwand was fully rewritten for Python 3 in the <a class="reference external" href="https://tornadoweb.org/">Tornado</a> framework.</li>
+</ul>
+<p>Together with a slew of smaller changes and bugfixes.</p>
+<div class="section" id="history">
+<h2>history</h2>
+<p>I've been asked before to clarify on the history of the pastebin and how it
+came to be. This section of the blog post will go into that.</p>
+<p>Back when <a class="reference external" href="https://bpython-interpreter.org/">bpython</a> was started I was one of its contributors (still am) on a
+different nickname. I thought it would be neat if we would add pastebin support
+to bpython but to do so I didn't want to be reliant on a 3rd party pastebin.</p>
+<p>Back in those days there was another pastebin called LodgeIt, it was ran by the
+people behind <a class="reference external" href="https://pocoo.org/">Pocoo</a> and built on the <a class="reference external" href="https://palletsprojects.com/p/flask/">Flask</a> framework. I setup my own instance
+of this on the <a class="reference external" href="https://bpaste.net/">bpaste.net</a> domain. That name came from the bpython name.</p>
+<p>After a while some features (I don't exactly recall which) needed to be added
+to bpaste.net and I decided to fork LodgeIt and named it pinnwand. That means
+&quot;bulletin board&quot; in English and was fitting for a thing that people put stuff
+on for others to see.</p>
+<p>In keeping with the theme my other projects that involve pinnwand are named
+in similar vein: <a class="reference external" href="https://supakeen.com/project/steck/">steck</a> (to stick) a client for sticking stuff on the pinnwand
+and <a class="reference external" href="https://supakeen.com/project/nagel/">nagel</a> (a thumbtack) as the library to interface with the pinnwand.</p>
+<p>This fork then went on to be hosted at both bpaste.net and on a separate domain
+for the #python channel on Freenode. Someone else maintained that instance of
+pinnwand. The pastebin recommended in the channel flip flopped between the
+channel instance and bpaste.net.</p>
+<p>A few years later I rekindled my love for the project and decided to start from
+scratch. With this a lot of history was lost but here we are at version 1.0.0
+and here to stay!</p>
+</div>
+
+    </article>
+</section>
+        <footer>
+            <p>Go back <a href="/">home</a> or find me on <a href="https://twitter.com/supakeen">Twitter</a> if I got something wrong.</p>
+        </footer>
+    </body>
+</html>

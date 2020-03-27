@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-01-01T12:00:00+01:00</updated><entry><title>The plans for 2020</title><link href="https://supakeen.com/weblog/stuff-for-2020.html" rel="alternate"></link><published>2020-01-01T12:00:00+01:00</published><updated>2020-01-01T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-01-01:/weblog/stuff-for-2020.html</id><summary type="html">&lt;p class="first last"&gt;Stuff I'll be working on in 2020.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-03-27T12:00:00+01:00</updated><entry><title>Pinnwand 1.0.0 and its history</title><link href="https://supakeen.com/weblog/pinnwand-100-and-history.html" rel="alternate"></link><published>2020-03-27T12:00:00+01:00</published><updated>2020-03-27T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-03-27:/weblog/pinnwand-100-and-history.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.0.0 and its history.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://supakeen.com/project/pinnwand/"&gt;pinnwand&lt;/a&gt; 1.0.0 was released and shortly thereafter followed by the customary
+1.0.1 release to fix that one bug that always gets discovered just after
+release. You can download these from &lt;a class="reference external" href="https://pypi.org/project/pinnwand/"&gt;PyPI&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The major features that have been added to the pinnwand 1.0 release are:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;multi-file pastes, pastes can now contain multiple files&lt;/li&gt;
+&lt;li&gt;shorter URLs, paste IDs are now more readable and less typo prone&lt;/li&gt;
+&lt;li&gt;pinnwand was fully rewritten for Python 3 in the &lt;a class="reference external" href="https://tornadoweb.org/"&gt;Tornado&lt;/a&gt; framework.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Together with a slew of smaller changes and bugfixes.&lt;/p&gt;
+&lt;div class="section" id="history"&gt;
+&lt;h2&gt;history&lt;/h2&gt;
+&lt;p&gt;I've been asked before to clarify on the history of the pastebin and how it
+came to be. This section of the blog post will go into that.&lt;/p&gt;
+&lt;p&gt;Back when &lt;a class="reference external" href="https://bpython-interpreter.org/"&gt;bpython&lt;/a&gt; was started I was one of its contributors (still am) on a
+different nickname. I thought it would be neat if we would add pastebin support
+to bpython but to do so I didn't want to be reliant on a 3rd party pastebin.&lt;/p&gt;
+&lt;p&gt;Back in those days there was another pastebin called LodgeIt, it was ran by the
+people behind &lt;a class="reference external" href="https://pocoo.org/"&gt;Pocoo&lt;/a&gt; and built on the &lt;a class="reference external" href="https://palletsprojects.com/p/flask/"&gt;Flask&lt;/a&gt; framework. I setup my own instance
+of this on the &lt;a class="reference external" href="https://bpaste.net/"&gt;bpaste.net&lt;/a&gt; domain. That name came from the bpython name.&lt;/p&gt;
+&lt;p&gt;After a while some features (I don't exactly recall which) needed to be added
+to bpaste.net and I decided to fork LodgeIt and named it pinnwand. That means
+&amp;quot;bulletin board&amp;quot; in English and was fitting for a thing that people put stuff
+on for others to see.&lt;/p&gt;
+&lt;p&gt;In keeping with the theme my other projects that involve pinnwand are named
+in similar vein: &lt;a class="reference external" href="https://supakeen.com/project/steck/"&gt;steck&lt;/a&gt; (to stick) a client for sticking stuff on the pinnwand
+and &lt;a class="reference external" href="https://supakeen.com/project/nagel/"&gt;nagel&lt;/a&gt; (a thumbtack) as the library to interface with the pinnwand.&lt;/p&gt;
+&lt;p&gt;This fork then went on to be hosted at both bpaste.net and on a separate domain
+for the #python channel on Freenode. Someone else maintained that instance of
+pinnwand. The pastebin recommended in the channel flip flopped between the
+channel instance and bpaste.net.&lt;/p&gt;
+&lt;p&gt;A few years later I rekindled my love for the project and decided to start from
+scratch. With this a lot of history was lost but here we are at version 1.0.0
+and here to stay!&lt;/p&gt;
+&lt;/div&gt;
+</content><category term="python"></category><category term="python"></category><category term="pinnwand"></category></entry><entry><title>The plans for 2020</title><link href="https://supakeen.com/weblog/stuff-for-2020.html" rel="alternate"></link><published>2020-01-01T12:00:00+01:00</published><updated>2020-01-01T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-01-01:/weblog/stuff-for-2020.html</id><summary type="html">&lt;p class="first last"&gt;Stuff I'll be working on in 2020.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Not quite the blog post I'd normally write. This one is mostly for me to have
 a look at every now and then and see if I'm achieving what I want to do. A
 very long New Years resolution!&lt;/p&gt;
