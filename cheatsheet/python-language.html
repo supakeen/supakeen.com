@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="shortcut icon" type="image/icon" href="/favicon.ico"/>
+        <link rel="stylesheet" type="text/css" href="/weblog/theme/css/reset.css"/>
+        <link rel="stylesheet" type="text/css" href="/weblog/theme/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="/style.css"/>
+        <title>supakeen's cheatsheets</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/">homepage</a></li>
+                    <li><a href="/weblog">weblog</a></li>
+                    <li><a href="/note">notes</a></li>
+                    <li><a href="/recipe">recipes</a></li>
+                    <li><a href="/project">projects</a></li>
+                    <li><a href="/cheatsheet">cheatsheet</a></li>
+                    <li><a href="/demo">demos</a></li>
+                </ul>
+            </nav>
+            <h1>supakeen's cheats</h1>
+        </header>
+        <article>
+            <h2>Python language</h2>
+            <p>A bunch of commonly performed tasks that can be done quite tersely. Not always the best to use these for readability concerns but fun to take a look at or thing I have to look up.</p>
+            <p>Many of these examples make use of the itertools and functools built-in modules. I use some default naming such as <code>L</code> for list, <code>D</code> for dictionary.</p>
+            <h3 id="combining-dictionaries">Combining dictionaries</h3>
+            <p>Creating a new dictonary:</p>
+            <pre>{**D0, **D1}</pre>
+            <p>Updating an existing dictionary:
+            <pre>D0.update(D1)</pre>
+            <p>Which one to use depends on your usecase.</p>
+            <h3 id="counting-values">Counting values in an iterable</h3>
+            <p>Counting values of a certain type in ant iterable can be done in many ways, here are a few.</p>
+            <pre>sum(value == "target" for value in L)</pre>
+            <p>Or alternatively you could use:</p>
+            <pre>sum(1 for value in L if value == "target")</pre>
+            <p>Or use the builtin <code>collections</code> module:</p>
+            <pre>import collections
+collections.Counter(L)["target"]</pre>
+            <p>Using a normal for loop and a collector variable is of course also possible!</p>
+        </article>
+    </body>
+</html>
