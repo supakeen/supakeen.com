@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-03-27T12:00:00+01:00</updated><entry><title>Pinnwand 1.0.0 and its history</title><link href="https://supakeen.com/weblog/pinnwand-100-and-history.html" rel="alternate"></link><published>2020-03-27T12:00:00+01:00</published><updated>2020-03-27T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-03-27:/weblog/pinnwand-100-and-history.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.0.0 and its history.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-03-27T12:00:00+01:00</updated><entry><title>Release of bpython 0.19</title><link href="https://supakeen.com/weblog/bpython-019.html" rel="alternate"></link><published>2020-03-27T12:00:00+01:00</published><updated>2020-03-27T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-03-27:/weblog/bpython-019.html</id><summary type="html">&lt;p class="first last"&gt;About the release of bpython 0.19&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://bpython-interpreter.org/"&gt;bpython&lt;/a&gt; 0.19 was just released. You can get it from &lt;a class="reference external" href="https://pypi.org/project/bpython/"&gt;PyPI&lt;/a&gt; or check out our
+&lt;a class="reference external" href="https://github.com/bpython/bpython"&gt;GitHub&lt;/a&gt;. The changelog was as follows:&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;0.19&lt;/h2&gt;
+&lt;div class="section" id="general-information"&gt;
+&lt;h3&gt;General information&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;The bpython-cli and bpython-urwid rendering backends have been deprecated and will show a warning that they'll be removed in a future release when started.&lt;/li&gt;
+&lt;li&gt;Usage in combination with Python 2 has been deprecated. This does not mean that support is dropped instantly but rather that at some point in the future we will stop running our testcases against Python 2.&lt;/li&gt;
+&lt;li&gt;The new pinnwand API is used for the pastebin functionality. We have dropped two configuration options: &lt;cite&gt;pastebin_show_url&lt;/cite&gt; and &lt;cite&gt;pastebin_removal_url&lt;/cite&gt;. If you have your bpython configured to run against an old version of &lt;cite&gt;pinnwand&lt;/cite&gt; please update it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="fixes"&gt;
+&lt;h3&gt;Fixes&lt;/h3&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;#765: Display correct signature for decorated functions. Thanks to Benedikt Rascher-Friesenhausen.&lt;/li&gt;
+&lt;li&gt;#776: Protect get_args from user code exceptions&lt;/li&gt;
+&lt;li&gt;Improve lock file handling on Windows&lt;/li&gt;
+&lt;li&gt;#791: Use importlib instead of deprecated imp when running under Python 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Support for Python 3.8 has been added. Support for Python 3.4 has been dropped.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</content><category term="python"></category><category term="python"></category><category term="pinnwand"></category></entry><entry><title>Pinnwand 1.0.0 and its history</title><link href="https://supakeen.com/weblog/pinnwand-100-and-history.html" rel="alternate"></link><published>2020-03-27T12:00:00+01:00</published><updated>2020-03-27T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-03-27:/weblog/pinnwand-100-and-history.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.0.0 and its history.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://supakeen.com/project/pinnwand/"&gt;pinnwand&lt;/a&gt; 1.0.0 was released and shortly thereafter followed by the customary
 1.0.1 release to fix that one bug that always gets discovered just after
 release. You can download these from &lt;a class="reference external" href="https://pypi.org/project/pinnwand/"&gt;PyPI&lt;/a&gt;.&lt;/p&gt;
