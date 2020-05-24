@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-03-27T12:00:00+01:00</updated><entry><title>Release of bpython 0.19</title><link href="https://supakeen.com/weblog/bpython-019.html" rel="alternate"></link><published>2020-03-27T12:00:00+01:00</published><updated>2020-03-27T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-03-27:/weblog/bpython-019.html</id><summary type="html">&lt;p class="first last"&gt;About the release of bpython 0.19&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-05-25T12:00:00+02:00</updated><entry><title>Pinnwand 1.1.0</title><link href="https://supakeen.com/weblog/pinnwand-110.html" rel="alternate"></link><published>2020-05-25T12:00:00+02:00</published><updated>2020-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-05-25:/weblog/pinnwand-110.html</id><summary type="html">&lt;p class="first last"&gt;Changelog for the pinnwand 1.1.0 release.&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;I have pushed a new release of pinnwand to &lt;a class="reference external" href="https://pypi.org/project/pinnwand/"&gt;PyPI&lt;/a&gt;. &lt;a class="reference external" href="https://bpaste.net/"&gt;bpaste.net&lt;/a&gt; is now also
+accessible through the shorter &lt;a class="reference external" href="https://bpa.st/"&gt;bpa.st&lt;/a&gt; domain!&lt;/p&gt;
+&lt;p&gt;Here are the changes related to pinnwand itself:&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Provide a button to toggle line wrapping, contributed by &lt;a class="reference external" href="https://github.com/Kwpolska"&gt;Kwpolska&lt;/a&gt;. (#51)&lt;/li&gt;
+&lt;li&gt;Auto-delete pastes on view when they've expired. (#63)&lt;/li&gt;
+&lt;li&gt;Include original filename if given for paste downloads (#26)&lt;/li&gt;
+&lt;li&gt;Provide a button to toggle opposite colorschemes. (#69)&lt;/li&gt;
+&lt;li&gt;For pastes the first file will now have the same slug as the paste itself,
+this allows for users to replace part of the URL to get to raw and download
+links. (#64)&lt;/li&gt;
+&lt;li&gt;Allow access to raw and download handlers through /:id/(raw|download) to
+let people more easily change the URL by hand when linked to a paste (#72)&lt;/li&gt;
+&lt;li&gt;Consolidate separate pygments and pinnwand stylesheets into one.&lt;/li&gt;
+&lt;/ul&gt;
+</content><category term="python"></category><category term="python"></category><category term="pinnwand"></category></entry><entry><title>Release of bpython 0.19</title><link href="https://supakeen.com/weblog/bpython-019.html" rel="alternate"></link><published>2020-03-27T12:00:00+01:00</published><updated>2020-03-27T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-03-27:/weblog/bpython-019.html</id><summary type="html">&lt;p class="first last"&gt;About the release of bpython 0.19&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://bpython-interpreter.org/"&gt;bpython&lt;/a&gt; 0.19 was just released. You can get it from &lt;a class="reference external" href="https://pypi.org/project/bpython/"&gt;PyPI&lt;/a&gt; or check out our
 &lt;a class="reference external" href="https://github.com/bpython/bpython"&gt;GitHub&lt;/a&gt;. The changelog was as follows:&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
