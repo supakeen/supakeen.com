@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-05-24T12:00:00+02:00</updated><entry><title>Release of pinnwand 1.1.0</title><link href="https://supakeen.com/weblog/pinnwand-110.html" rel="alternate"></link><published>2020-05-24T12:00:00+02:00</published><updated>2020-05-24T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-05-24:/weblog/pinnwand-110.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.1.0&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog - python</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/python.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-08-06T12:00:00+02:00</updated><entry><title>Release of pinnwand 1.2.0</title><link href="https://supakeen.com/weblog/pinnwand-120.html" rel="alternate"></link><published>2020-08-06T12:00:00+02:00</published><updated>2020-08-06T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-08-06:/weblog/pinnwand-120.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.2.0&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/supakeen/pinnwand"&gt;pinnwand&lt;/a&gt; 1.2.0 has been released. The changelog is as follows:&lt;/p&gt;
+&lt;p&gt;New features all around, minor bugfixes, code quality improvements.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Add language autodetection, contributed by &lt;a class="reference external" href="https://github.com/mweinelt"&gt;mweinelt&lt;/a&gt;. (#83)&lt;/li&gt;
+&lt;li&gt;Provide a hex view for pastes. (#86)&lt;/li&gt;
+&lt;li&gt;Add copy to clipboard button. (#87)&lt;/li&gt;
+&lt;li&gt;Command line option (-v) to change log level. (#88)&lt;/li&gt;
+&lt;li&gt;Make the outline color of the focused form elements be in-line with the
+general highlight color.&lt;/li&gt;
+&lt;li&gt;Sum up filesizes and check against paste size. This change now makes the
+paste size limit the total size, not a per-file limit! Adjust your
+configuration accordingly. (#89)&lt;/li&gt;
+&lt;li&gt;Add a report link for files that may be problematic, this link will be
+added only if the &lt;tt class="docutils literal"&gt;report_email&lt;/tt&gt; field is set to anything than None in the
+configuration file, contributed by &lt;a class="reference external" href="https://github.com/Bruce1347"&gt;Bruce1347&lt;/a&gt; (#2)&lt;/li&gt;
+&lt;li&gt;Expanded testcase coverage for website from 69% to 84% by adding and fixing
+broken testcases.&lt;/li&gt;
+&lt;/ul&gt;
+</content><category term="python"></category><category term="pinnwand"></category></entry><entry><title>Release of pinnwand 1.1.0</title><link href="https://supakeen.com/weblog/pinnwand-110.html" rel="alternate"></link><published>2020-05-24T12:00:00+02:00</published><updated>2020-05-24T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-05-24:/weblog/pinnwand-110.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.1.0&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://supakeen.com/project/pinnwand/"&gt;pinnwand&lt;/a&gt; 1.1.0 has been released. The changelog is as follows:&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Provide a button to toggle line wrapping, contributed by &lt;a class="reference external" href="https://github.com/Kwpolska"&gt;Kwpolska&lt;/a&gt;. (#51)&lt;/li&gt;
