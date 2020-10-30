@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog - nim</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/nim.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-10-20T20:00:00+02:00</updated><entry><title>Nim Package of the Week: npeg</title><link href="https://supakeen.com/weblog/npotw-npeg.html" rel="alternate"></link><published>2020-10-20T20:00:00+02:00</published><updated>2020-10-20T20:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-10-20:/weblog/npotw-npeg.html</id><summary type="html">&lt;p class="first last"&gt;Nim package of the week npeg.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog - nim</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/nim.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-10-26T12:00:00+01:00</updated><entry><title>Nim Package of the Week: npeg</title><link href="https://supakeen.com/weblog/npotw-nimpy.html" rel="alternate"></link><published>2020-10-26T12:00:00+01:00</published><updated>2020-10-26T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-10-26:/weblog/npotw-nimpy.html</id><summary type="html">&lt;p class="first last"&gt;Nim package of the week nimpy&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/yglukhov/nimpy"&gt;nimpy&lt;/a&gt; is a package for &lt;a class="reference external" href="https://nim-lang.org/"&gt;Nim&lt;/a&gt; to allow bidirectional integration between Python
+and Nim. This lets you write functions in Nim and call them from Python and
+vice versa.&lt;/p&gt;
+&lt;p&gt;I've used &lt;tt class="docutils literal"&gt;nimpy&lt;/tt&gt; several times to speed up tight loops or together with last
+weeks NPOTW &lt;a class="reference external" href="https://supakeen.com/weblog/npotw-npeg.html"&gt;npeg&lt;/a&gt; to write fast parsers to use from Python without having to
+get down and dirty in C.&lt;/p&gt;
+&lt;p&gt;Examples speak more than words, here is a &lt;tt class="docutils literal"&gt;nimpy&lt;/tt&gt; example from its README:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;# mymodule.nim - file name should match the module name you&amp;#39;re going to import from python&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;nimpy&lt;/span&gt;
+
+&lt;span class="k"&gt;proc &lt;/span&gt;&lt;span class="nf"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="p"&gt;{.&lt;/span&gt;&lt;span class="n"&gt;exportpy&lt;/span&gt;&lt;span class="p"&gt;.}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;!&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When you build the above module with &lt;tt class="docutils literal"&gt;nim c &lt;span class="pre"&gt;--threads:on&lt;/span&gt; &lt;span class="pre"&gt;--app:lib&lt;/span&gt; &lt;span class="pre"&gt;--out:mymodule.so&lt;/span&gt; mymodule&lt;/tt&gt;
+and then place it on your import path for Python you can use it:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;mymodule&lt;/span&gt;
+&lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mymodule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;
+&lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mymodule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The offered speedups to get C speed of execution while still having a higher
+level language to write your code in should lessen the step when deciding to
+fork out some performance critical bits of your Python to another language!&lt;/p&gt;
+&lt;p&gt;The Nim Package of the Week is a series on Nim packages that make up the
+ecosystem where a new article appears weekly on a library that you should
+know about.&lt;/p&gt;
+</content><category term="nim"></category><category term="npotw"></category><category term="nimpy"></category></entry><entry><title>Nim Package of the Week: npeg</title><link href="https://supakeen.com/weblog/npotw-npeg.html" rel="alternate"></link><published>2020-10-20T20:00:00+02:00</published><updated>2020-10-20T20:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-10-20:/weblog/npotw-npeg.html</id><summary type="html">&lt;p class="first last"&gt;Nim package of the week npeg.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/zevv/npeg"&gt;npeg&lt;/a&gt; is a package for &lt;a class="reference external" href="https://nim-lang.org/"&gt;Nim&lt;/a&gt; implementing &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Parsing_expression_grammar"&gt;PEGs&lt;/a&gt; or Parser Expression Grammars.
 This allows you to express complex parsing operations in a semi-standardized
 and concise manner while offering more flexibility than Regular Expressions
