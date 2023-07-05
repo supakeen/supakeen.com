@@ -1,4 +1,0 @@
-Random Number Generators
-========================
-
-I love to generate numbers.

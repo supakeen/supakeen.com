@@ -1,4 +1,0 @@
-Problems
-########
-
-Some common problems and how to solve them.
