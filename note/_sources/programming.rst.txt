@@ -1,6 +1,8 @@
 Programming
 ###########
 
+My day job is programming, here's some notes on the languages I use or have used extensively.
+
 C
 =
 

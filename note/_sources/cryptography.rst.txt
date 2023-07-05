@@ -1,6 +1,8 @@
 Cryptography
 ############
 
+I'm quite interested by cryptographic primitives and like to write some things down about them.
+
 Making your own
 ===============
 

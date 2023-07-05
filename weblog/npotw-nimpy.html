@@ -4,9 +4,8 @@
         <meta charset="utf-8" />
         <title>Nim Package of the Week: nimpy</title>
         <link rel="shortcut icon" type="image/icon" href="theme/images/favicon.ico"/>
-        <link rel="stylesheet" href="./theme/css/main.css" />
+        <link rel="stylesheet" href="/style.css">
         <link rel="stylesheet" href="./theme/css/pygments.css" />
-        <link href="https://supakeen.com/weblog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="supakeen's weblog Atom Feed" />
     </head>
 
     <body>
@@ -37,7 +36,7 @@ get down and dirty in C.</p>
 <div class="highlight"><pre><span></span><span class="c"># mymodule.nim - file name should match the module name you&#39;re going to import from python</span>
 <span class="kn">import</span> <span class="n">nimpy</span>
 
-<span class="k">proc </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="kt">string</span><span class="p">):</span> <span class="kt">string</span> <span class="p">{.</span><span class="n">exportpy</span><span class="p">.}</span> <span class="o">=</span>
+<span class="k">proc </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">string</span><span class="p">):</span> <span class="nb">string</span> <span class="p">{.</span><span class="n">exportpy</span><span class="p">.}</span> <span class="o">=</span>
   <span class="k">return</span> <span class="s">&quot;Hello, &quot;</span> <span class="o">&amp;</span> <span class="n">name</span> <span class="o">&amp;</span> <span class="s">&quot;!&quot;</span>
 </pre></div>
 <p>When you build the above module with <tt class="docutils literal">nim c <span class="pre">--threads:on</span> <span class="pre">--app:lib</span> <span class="pre">--out:mymodule.so</span> mymodule</tt>

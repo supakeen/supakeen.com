@@ -1,14 +1,16 @@
 Operating Systems
 #################
 
+I ues a plethora of operating systems in my daily life. As long as they run any type of terminal and a virtual machine I tend to be happy.
+
 FreeBSD
 =======
 
 Linux
 =====
 
-Mac OS X
-========
+macOS
+=====
 
 Windows
 =======

@@ -2,8 +2,6 @@
 <html>
     <head>
         <link rel="shortcut icon" type="image/icon" href="/favicon.ico"/>
-        <link rel="stylesheet" type="text/css" href="/weblog/theme/css/reset.css"/>
-        <link rel="stylesheet" type="text/css" href="/weblog/theme/css/main.css"/>
         <link rel="stylesheet" type="text/css" href="/style.css"/>
         <title>supakeen's homepage</title>
     </head>
@@ -22,8 +20,8 @@
             </nav>
             <h1>supakeen's homepage</h1>
         </header>
-        <article>
-            <p>Hey, I enjoy programming, cooking, and some other things but mostly the first two are shared here.</p>
+        <main class="homepage">
+            <p>Hey, I enjoy programming, metalworks (mostly welding), cooking, and some other things but mostly the first two are shared here. My nickname is <strong>supakeen</strong> but people also know me as <strong>Simon de Vlieger</strong>. I work at Red Hat on the Image Builder team and related projects. I am a packager for Fedora and contribute to various upstream projects including my own.</p>
             <h2>nickname</h2>
             <p>The nickname <em>supakeen</em> is a combination of two names: Commander Keen and Supaplex. Both were games I played a bunch when I was tiny.</p>
             <h2>index</h2>
@@ -39,36 +37,27 @@
             <h2>external</h2>
             <p>I maintain a bunch of external accounts as well, these are my most used thought that doesn't mean I'm particularly active on them.</p>
             <ul>
-                <li><a href="https://mastodon.tty.cat/@supakeen">mastodon</a> slightly inactive sillyness</li>
-                <li><a href="https://github.com/supakeen">github</a> my code</li>
-                <li><a href="https://keybase.io/supakeen">keybase</a> (contains more)</li>
+                <li><a rel="me" href="https://mastodon.tty.cat/@supakeen">mastodon</a> slightly inactive sillyness</li>
+                <li><a rel="me" href="https://src.tty.cat/supakeen">gitea</a> my code</li>
+                <li><a rel="me" href="https://github.com/supakeen">github</a> my code</li>
+                <li><a rel="me" href="https://gitlab.com/supakeen">gitlab</a> my code</li>
+                <li><a rel="me" href="https://keybase.io/supakeen">keybase</a> (contains more)</li>
             </ul>
             <h2>my projects</h2>
-            <p>Some of my open source projects both in software and hardware. I program mostly in the Python programming language, C, bash, and others.</p>
+            <p>Some of my open source projects both in software and hardware. I program mostly in the Python programming language, C, bash, and others. These are all hosted on either GitHub or my own Gitea instance. You can find a more complete list at <a href="/project/">projects</a>.</p>
             <ul>
-                <li><a href="./project/pinnwand">pinnwand</a> a pastebin in Python</li>
-                <li><a href="./project/gb">gb</a> a gopher server in Python</li>
-                <li><a href="./project/nagel">nagel</a> a library for pinnwand in Python.</li>
-                <li><a href="./project/steck">steck</a> a client for pinnwand in Python.</li>
-                <li><a href="./project/simba">simba</a> random number generators implemented in Nim.</li>
-                <li><a href="./project/clip">clip</a> command line parsing with PEGs in Nim.</li>
-            </ul>
-            <p>A few of my projects are organized into larger projects, some of these are.</p>
-            <h3>HuisHouden</h3>
-            <p>A small ecosystem for home statistics and automation.</p>
-            <ul>
-                <li><a href="./project/huishouden/espyta">espyta</a> to flash ESP32/ESP8266 over the air as a webhook.</li>
-                <li><a href="./project/huishouden/lineprotocol">LineProtocol</a> an implementation of the InfluxDB line protocol.</li>
-                <li><a href="./project/huishouden/alarmscreen">AlarmScreen</a> firmware for the LilyGo TTGo T-Display to show stats and alarm messages.</li>
-                <li><a href="./project/huishouden/paperscreen">PaperScreen</a> Epaper display for the HuisHouden ecosystem.</li>
+                <li><a href="https://github.com/supakeen/pinnwand">pinnwand</a> a pastebin in Python</li>
+                <li><a href="https://src.tty.cat/supakeen/gb">gb</a> a gopher server in Python</li>
+                <li><a href="https://github.com/supakeen/steck">steck</a> a client for pinnwand in Python.</li>
             </ul>
             <h2>other projects</h2>
             <p>These are projects I regularly contribute to but were not started by myself.</p>
             <ul>
                 <li><a href="https://bpython-interpreter.org/">bpython</a> a fancy repl for Python</li>
+                <li><a href="https://tty.cat/">tty.cat</a> services hosting for myself and friends</li>
             </ul>
             <h2>resume</h2>
-	    <p>I provide an <a href="/resume/anonymous.pdf">anonymized version of my resume online</a>, if you are interested in the non-anonymized version you can email me at <a href="mailto:cmdr@supakeen.com">cmdr@supakeen.com</a>.</p>
-        </article>
+            <p>I provide an <a href="/resume/anonymous.pdf">anonymized version of my resume online</a>, if you are interested in the non-anonymized version you can email me at <a href="mailto:cmdr@supakeen.com">cmdr@supakeen.com</a>.</p>
+        </main>
     </body>
 </html>

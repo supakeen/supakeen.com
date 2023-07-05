@@ -1,21 +1,4 @@
 Books
 #####
 
-Operating Systems
-=================
-
-Kernels
--------
-
-The Design and Implementation of the FreeBSD Operating System
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-A good book.
-
-Programming
-===========
-
-Python
-------
-
-Learn Python the Hard Way
-^^^^^^^^^^^^^^^^^^^^^^^^^
+I'm trying to read books, both technical and non-technical, those that I enjoy are listed here with my thoughts on them.
