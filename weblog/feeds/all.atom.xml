@@ -1,130 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2020-10-26T12:00:00+01:00</updated><entry><title>Nim Package of the Week: nimpy</title><link href="https://supakeen.com/weblog/npotw-nimpy.html" rel="alternate"></link><published>2020-10-26T12:00:00+01:00</published><updated>2020-10-26T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-10-26:/weblog/npotw-nimpy.html</id><summary type="html">&lt;p class="first last"&gt;Nim package of the week nimpy&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/yglukhov/nimpy"&gt;nimpy&lt;/a&gt; is a package for &lt;a class="reference external" href="https://nim-lang.org/"&gt;Nim&lt;/a&gt; to allow bidirectional integration between Python
-and Nim. This lets you write functions in Nim and call them from Python and
-vice versa.&lt;/p&gt;
-&lt;p&gt;I've used &lt;tt class="docutils literal"&gt;nimpy&lt;/tt&gt; several times to speed up tight loops or together with last
-weeks NPOTW &lt;a class="reference external" href="https://supakeen.com/weblog/npotw-npeg.html"&gt;npeg&lt;/a&gt; to write fast parsers to use from Python without having to
-get down and dirty in C.&lt;/p&gt;
-&lt;p&gt;Examples speak more than words, here is a &lt;tt class="docutils literal"&gt;nimpy&lt;/tt&gt; example from its README:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;# mymodule.nim - file name should match the module name you&amp;#39;re going to import from python&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;nimpy&lt;/span&gt;
-
-&lt;span class="k"&gt;proc &lt;/span&gt;&lt;span class="nf"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt; &lt;span class="kt"&gt;string&lt;/span&gt; &lt;span class="p"&gt;{.&lt;/span&gt;&lt;span class="n"&gt;exportpy&lt;/span&gt;&lt;span class="p"&gt;.}&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
-  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello, &amp;quot;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;!&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;When you build the above module with &lt;tt class="docutils literal"&gt;nim c &lt;span class="pre"&gt;--threads:on&lt;/span&gt; &lt;span class="pre"&gt;--app:lib&lt;/span&gt; &lt;span class="pre"&gt;--out:mymodule.so&lt;/span&gt; mymodule&lt;/tt&gt;
-and then place it on your import path for Python you can use it:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;mymodule&lt;/span&gt;
-&lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mymodule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;
-&lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;mymodule&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;world&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hello, world!&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The offered speedups to get C speed of execution while still having a higher
-level language to write your code in should lessen the step when deciding to
-fork out some performance critical bits of your Python to another language!&lt;/p&gt;
-&lt;p&gt;The Nim Package of the Week is a series on Nim packages that make up the
-ecosystem where a new article appears weekly on a library that you should
-know about.&lt;/p&gt;
-</content><category term="nim"></category><category term="npotw"></category><category term="nimpy"></category></entry><entry><title>Nim Package of the Week: npeg</title><link href="https://supakeen.com/weblog/npotw-npeg.html" rel="alternate"></link><published>2020-10-20T20:00:00+02:00</published><updated>2020-10-20T20:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-10-20:/weblog/npotw-npeg.html</id><summary type="html">&lt;p class="first last"&gt;Nim package of the week npeg.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/zevv/npeg"&gt;npeg&lt;/a&gt; is a package for &lt;a class="reference external" href="https://nim-lang.org/"&gt;Nim&lt;/a&gt; implementing &lt;a class="reference external" href="https://en.wikipedia.org/wiki/Parsing_expression_grammar"&gt;PEGs&lt;/a&gt; or Parser Expression Grammars.
-This allows you to express complex parsing operations in a semi-standardized
-and concise manner while offering more flexibility than Regular Expressions
-have.&lt;/p&gt;
-&lt;p&gt;Examples speak more than words, here is an &lt;tt class="docutils literal"&gt;npeg&lt;/tt&gt; example from its README:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;npeg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;strutils&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tables&lt;/span&gt;
-
-&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;Dict&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Table&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
-
-&lt;span class="k"&gt;let&lt;/span&gt; &lt;span class="n"&gt;parser&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;peg&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;pairs&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Dict&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-  &lt;span class="n"&gt;pairs&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="n"&gt;pair&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sc"&gt;&amp;#39;,&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
-  &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;Alpha&lt;/span&gt;
-  &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;Digit&lt;/span&gt;
-  &lt;span class="n"&gt;pair&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;-&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="sc"&gt;&amp;#39;=&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;[$&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;parseInt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;$&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="kd"&gt;var&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Table&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;doAssert&lt;/span&gt; &lt;span class="n"&gt;parser&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;one=1,two=2,three=3,four=4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="n"&gt;ok&lt;/span&gt;
-&lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="n"&gt;words&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The above parses the string &lt;tt class="docutils literal"&gt;one=1,two=2,three=3,four=4&lt;/tt&gt; into a &lt;tt class="docutils literal"&gt;Dict&lt;/tt&gt; by
-key and value.&lt;/p&gt;
-&lt;p&gt;Aside from providing nice macros and syntax to define PEGs the &lt;tt class="docutils literal"&gt;npeg&lt;/tt&gt; package
-also contains one of the most complete READMEs dense with information on how
-to write and handle PEGs for parsing.&lt;/p&gt;
-&lt;p&gt;The Nim Package of the Week is a series on Nim packages that make up the
-ecosystem where a new article appears weekly on a library that you should
-know about.&lt;/p&gt;
-</content><category term="nim"></category><category term="npotw"></category><category term="npeg"></category></entry><entry><title>Release of bpython 0.20</title><link href="https://supakeen.com/weblog/bpython-020.html" rel="alternate"></link><published>2020-10-20T12:00:00+02:00</published><updated>2020-10-20T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-10-20:/weblog/bpython-020.html</id><summary type="html">&lt;p class="first last"&gt;About the release of bpython 0.20&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://bpython-interpreter.org/"&gt;bpython&lt;/a&gt; 0.20 was just released. You can get it from &lt;a class="reference external" href="https://pypi.org/project/bpython/"&gt;PyPI&lt;/a&gt; or check out our
-&lt;a class="reference external" href="https://github.com/bpython/bpython"&gt;GitHub&lt;/a&gt;. The changelog was as follows:&lt;/p&gt;
-&lt;div class="section" id="id1"&gt;
-&lt;h2&gt;0.20&lt;/h2&gt;
-&lt;div class="section" id="general-information"&gt;
-&lt;h3&gt;General information&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;The next release of bpython (0.20) will drop support for Python 2.&lt;/li&gt;
-&lt;li&gt;Support for Python 3.9 has been added. Support for Python 3.5 has been
-dropped.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="new-features"&gt;
-&lt;h3&gt;New features&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;#802: Provide redo.
-Thanks to Evan.&lt;/li&gt;
-&lt;li&gt;#835: Add support for importing namespace packages.
-Thanks to Thomas Babej.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="fixes"&gt;
-&lt;h3&gt;Fixes&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;#622: Provide encoding attribute for FakeOutput.&lt;/li&gt;
-&lt;li&gt;#806: Prevent symbolic link loops in import completion.
-Thanks to Etienne Richart.&lt;/li&gt;
-&lt;li&gt;#807: Support packages using importlib.metadata API.
-Thanks to uriariel.&lt;/li&gt;
-&lt;li&gt;#809: Fix support for Python 3.9's ast module.&lt;/li&gt;
-&lt;li&gt;#817: Fix cursor position with full-width characters.
-Thanks to Jack Rybarczyk.&lt;/li&gt;
-&lt;li&gt;#853: Fix invalid escape sequences.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="python"></category><category term="bpython"></category></entry><entry><title>Release of pinnwand 1.2.0</title><link href="https://supakeen.com/weblog/pinnwand-120.html" rel="alternate"></link><published>2020-08-06T12:00:00+02:00</published><updated>2020-08-06T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-08-06:/weblog/pinnwand-120.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.2.0&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://github.com/supakeen/pinnwand"&gt;pinnwand&lt;/a&gt; 1.2.0 has been released. The changelog is as follows:&lt;/p&gt;
-&lt;p&gt;New features all around, minor bugfixes, code quality improvements.&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Add language autodetection, contributed by &lt;a class="reference external" href="https://github.com/mweinelt"&gt;mweinelt&lt;/a&gt;. (#83)&lt;/li&gt;
-&lt;li&gt;Provide a hex view for pastes. (#86)&lt;/li&gt;
-&lt;li&gt;Add copy to clipboard button. (#87)&lt;/li&gt;
-&lt;li&gt;Command line option (-v) to change log level. (#88)&lt;/li&gt;
-&lt;li&gt;Make the outline color of the focused form elements be in-line with the
-general highlight color.&lt;/li&gt;
-&lt;li&gt;Sum up filesizes and check against paste size. This change now makes the
-paste size limit the total size, not a per-file limit! Adjust your
-configuration accordingly. (#89)&lt;/li&gt;
-&lt;li&gt;Add a report link for files that may be problematic, this link will be
-added only if the &lt;tt class="docutils literal"&gt;report_email&lt;/tt&gt; field is set to anything than None in the
-configuration file, contributed by &lt;a class="reference external" href="https://github.com/Bruce1347"&gt;Bruce1347&lt;/a&gt; (#2)&lt;/li&gt;
-&lt;li&gt;Expanded testcase coverage for website from 69% to 84% by adding and fixing
-broken testcases.&lt;/li&gt;
-&lt;/ul&gt;
-</content><category term="python"></category><category term="pinnwand"></category></entry><entry><title>Release of pinnwand 1.1.0</title><link href="https://supakeen.com/weblog/pinnwand-110.html" rel="alternate"></link><published>2020-05-24T12:00:00+02:00</published><updated>2020-05-24T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-05-24:/weblog/pinnwand-110.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.1.0&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://supakeen.com/project/pinnwand/"&gt;pinnwand&lt;/a&gt; 1.1.0 has been released. The changelog is as follows:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;Provide a button to toggle line wrapping, contributed by &lt;a class="reference external" href="https://github.com/Kwpolska"&gt;Kwpolska&lt;/a&gt;. (#51)&lt;/li&gt;
-&lt;li&gt;Auto-delete pastes on view when they've expired. (#63)&lt;/li&gt;
-&lt;li&gt;Include original filename if given for paste downloads (#26)&lt;/li&gt;
-&lt;li&gt;Provide a button to toggle opposite colorschemes. (#69)&lt;/li&gt;
-&lt;li&gt;For pastes the first file will now have the same slug as the paste itself,
-this allows for users to replace part of the URL to get to raw and download
-links. (#64)&lt;/li&gt;
-&lt;li&gt;Allow access to raw and download handlers through /:id/(raw|download) to
-let people more easily change the URL by hand when linked to a paste (#72)&lt;/li&gt;
-&lt;li&gt;Consolidate separate pygments and pinnwand stylesheets into one.&lt;/li&gt;
-&lt;/ul&gt;
-</content><category term="python"></category><category term="pinnwand"></category></entry><entry><title>A varnishncsa logfile per host</title><link href="https://supakeen.com/weblog/varnishncsa-per-host.html.html" rel="alternate"></link><published>2020-04-25T12:00:00+02:00</published><updated>2020-04-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-04-25:/weblog/varnishncsa-per-host.html.html</id><summary type="html">&lt;p class="first last"&gt;How to configure varnishncsa logging per host.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2023-08-09T12:00:00+02:00</updated><entry><title>What is Image Based Linux?</title><link href="https://supakeen.com/weblog/what-is-image-based-linux.html" rel="alternate"></link><published>2023-08-09T12:00:00+02:00</published><updated>2023-08-09T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2023-08-09:/weblog/what-is-image-based-linux.html</id><summary type="html">&lt;p class="first last"&gt;What is Image Based Linux?&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;In operating system land things are always changing. You might have heard about image based distributions such as [Endless OS](&lt;a class="reference external" href="https://www.endlessos.org/"&gt;https://www.endlessos.org/&lt;/a&gt;), [Fedora IoT](&lt;a class="reference external" href="https://fedoraproject.org/iot/"&gt;https://fedoraproject.org/iot/&lt;/a&gt;), [RHEL for Edge](&lt;a class="reference external" href="https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/edge-computing"&gt;https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/edge-computing&lt;/a&gt;), [Ubuntu Core](&lt;a class="reference external" href="https://ubuntu.com/core"&gt;https://ubuntu.com/core&lt;/a&gt;) and others. Perhaps you've heard other terms such as [Unified Kernel Images](&lt;a class="reference external" href="https://uapi-group.org/specifications/specs/unified_kernel_image/"&gt;https://uapi-group.org/specifications/specs/unified_kernel_image/&lt;/a&gt;) (UKI) [or Discoverable Disk Images](&lt;a class="reference external" href="https://uapi-group.org/specifications/specs/discoverable_disk_image/"&gt;https://uapi-group.org/specifications/specs/discoverable_disk_image/&lt;/a&gt;) (DDI). Let's get into what image based Linux is and what its possible benefits are to you.&lt;/p&gt;
+&lt;p&gt;Before we get started on the difference let me describe a more traditional Linux distribution. You install it from an ISO and update packages with that distributions package manager. If you have a lot of machines it might be hard to decide which state they are in. They all have different packages installed and are perhaps in different states regarding the updates they've installed and when they've last rebooted to use a new kernel.&lt;/p&gt;
+&lt;p&gt;With an image based distribution the system as a whole is built and updated as a single thing. A system being on a certain version means you know the state of everything on the system.&lt;/p&gt;
+&lt;p&gt;Image based distributions are useful in situations where you run many machines in many locations. Usually called the 'device edge'. Think a factory full of single board computers that collect sensor data. Point-of-sale systems. Information screens. Cars. Places where it isn't immediately feasible to send an engineer if something breaks. Image based distributions are also finding their place in the mobile market.&lt;/p&gt;
+&lt;p&gt;Running a normal distribution on these sorts of systems makes it hard to test the system before deploying updates. Image based distributions often support a form of A/B booting and monitored boot. This means that they can roll back from a broken update to a previously known good image.&lt;/p&gt;
+&lt;p&gt;Image based distributions often have a focus on providing easy provisioning of devices through things such as [FDO](&lt;a class="reference external" href="https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html"&gt;https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html&lt;/a&gt;) or [Ignition](&lt;a class="reference external" href="https://coreos.github.io/ignition/"&gt;https://coreos.github.io/ignition/&lt;/a&gt;). Try to provide a secure physical environment through dm/fsverity, secure boot, TPMs, and UKI. And a solid update cycle that can always restore to a previous state.&lt;/p&gt;
+</content><category term="linux"></category><category term="os"></category><category term="image-based"></category></entry><entry><title>A varnishncsa logfile per host</title><link href="https://supakeen.com/weblog/varnishncsa-per-host.html.html" rel="alternate"></link><published>2020-04-25T12:00:00+02:00</published><updated>2020-04-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-04-25:/weblog/varnishncsa-per-host.html.html</id><summary type="html">&lt;p class="first last"&gt;How to configure varnishncsa logging per host.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://varnish-cache.org/"&gt;Varnish&lt;/a&gt; is a caching proxy server in quite widespread use. Its common role is
 to set in between your load balancer and web servers to lessen the requests
 ending up at the latter.&lt;/p&gt;
@@ -205,7 +87,7 @@ Change: 2020-04-25 09:34:43.891850255 +0000
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;That's it! You can now use this file any way you want. Good luck.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="varnish"></category><category term="configuration"></category></entry><entry><title>How to name a project?</title><link href="https://supakeen.com/weblog/how-to-name-a-project.html" rel="alternate"></link><published>2020-04-06T12:00:00+02:00</published><updated>2020-04-06T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-04-06:/weblog/how-to-name-a-project.html</id><summary type="html">&lt;p class="first last"&gt;A strategy for naming projects.&lt;/p&gt;
+</content><category term="configuration"></category><category term="varnish"></category><category term="configuration"></category></entry><entry><title>How to name a project?</title><link href="https://supakeen.com/weblog/how-to-name-a-project.html" rel="alternate"></link><published>2020-04-06T12:00:00+02:00</published><updated>2020-04-06T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-04-06:/weblog/how-to-name-a-project.html</id><summary type="html">&lt;p class="first last"&gt;A strategy for naming projects.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;There's only two things hard about computers, naming things is one of them. We
 think for ages and sometimes it might put us off doing something entirely. This
 is especially annoying if it's a project name!&lt;/p&gt;
@@ -243,90 +125,7 @@ let's do a few with the words above:&lt;/p&gt;
 &lt;li&gt;cheet&lt;/li&gt;
 &lt;li&gt;bolty&lt;/li&gt;
 &lt;/ul&gt;
-</content><category term="auxiliary"></category></entry><entry><title>Release of bpython 0.19</title><link href="https://supakeen.com/weblog/bpython-019.html" rel="alternate"></link><published>2020-03-27T12:00:00+01:00</published><updated>2020-03-27T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-03-27:/weblog/bpython-019.html</id><summary type="html">&lt;p class="first last"&gt;About the release of bpython 0.19&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://bpython-interpreter.org/"&gt;bpython&lt;/a&gt; 0.19 was just released. You can get it from &lt;a class="reference external" href="https://pypi.org/project/bpython/"&gt;PyPI&lt;/a&gt; or check out our
-&lt;a class="reference external" href="https://github.com/bpython/bpython"&gt;GitHub&lt;/a&gt;. The changelog was as follows:&lt;/p&gt;
-&lt;div class="section" id="id1"&gt;
-&lt;h2&gt;0.19&lt;/h2&gt;
-&lt;div class="section" id="general-information"&gt;
-&lt;h3&gt;General information&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;The bpython-cli and bpython-urwid rendering backends have been deprecated and will show a warning that they'll be removed in a future release when started.&lt;/li&gt;
-&lt;li&gt;Usage in combination with Python 2 has been deprecated. This does not mean that support is dropped instantly but rather that at some point in the future we will stop running our testcases against Python 2.&lt;/li&gt;
-&lt;li&gt;The new pinnwand API is used for the pastebin functionality. We have dropped two configuration options: &lt;cite&gt;pastebin_show_url&lt;/cite&gt; and &lt;cite&gt;pastebin_removal_url&lt;/cite&gt;. If you have your bpython configured to run against an old version of &lt;cite&gt;pinnwand&lt;/cite&gt; please update it.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="fixes"&gt;
-&lt;h3&gt;Fixes&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;#765: Display correct signature for decorated functions. Thanks to Benedikt Rascher-Friesenhausen.&lt;/li&gt;
-&lt;li&gt;#776: Protect get_args from user code exceptions&lt;/li&gt;
-&lt;li&gt;Improve lock file handling on Windows&lt;/li&gt;
-&lt;li&gt;#791: Use importlib instead of deprecated imp when running under Python 3&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Support for Python 3.8 has been added. Support for Python 3.4 has been dropped.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</content><category term="python"></category><category term="bpython"></category></entry><entry><title>Pinnwand 1.0.0 and its history</title><link href="https://supakeen.com/weblog/pinnwand-100-and-history.html" rel="alternate"></link><published>2020-03-27T12:00:00+01:00</published><updated>2020-03-27T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-03-27:/weblog/pinnwand-100-and-history.html</id><summary type="html">&lt;p class="first last"&gt;About the release of pinnwand 1.0.0 and its history.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://supakeen.com/project/pinnwand/"&gt;pinnwand&lt;/a&gt; 1.0.0 was released and shortly thereafter followed by the customary
-1.0.1 release to fix that one bug that always gets discovered just after
-release. You can download these from &lt;a class="reference external" href="https://pypi.org/project/pinnwand/"&gt;PyPI&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;The major features that have been added to the pinnwand 1.0 release are:&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;multi-file pastes, pastes can now contain multiple files&lt;/li&gt;
-&lt;li&gt;shorter URLs, paste IDs are now more readable and less typo prone&lt;/li&gt;
-&lt;li&gt;pinnwand was fully rewritten for Python 3 in the &lt;a class="reference external" href="https://tornadoweb.org/"&gt;Tornado&lt;/a&gt; framework.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Together with a slew of smaller changes and bugfixes.&lt;/p&gt;
-&lt;div class="section" id="history"&gt;
-&lt;h2&gt;history&lt;/h2&gt;
-&lt;p&gt;I've been asked before to clarify on the history of the pastebin and how it
-came to be. This section of the blog post will go into that.&lt;/p&gt;
-&lt;p&gt;Back when &lt;a class="reference external" href="https://bpython-interpreter.org/"&gt;bpython&lt;/a&gt; was started I was one of its contributors (still am) on a
-different nickname. I thought it would be neat if we would add pastebin support
-to bpython but to do so I didn't want to be reliant on a 3rd party pastebin.&lt;/p&gt;
-&lt;p&gt;Back in those days there was another pastebin called LodgeIt, it was ran by the
-people behind &lt;a class="reference external" href="https://pocoo.org/"&gt;Pocoo&lt;/a&gt; and built on the &lt;a class="reference external" href="https://palletsprojects.com/p/flask/"&gt;Flask&lt;/a&gt; framework. I setup my own instance
-of this on the &lt;a class="reference external" href="https://bpaste.net/"&gt;bpaste.net&lt;/a&gt; domain. That name came from the bpython name.&lt;/p&gt;
-&lt;p&gt;After a while some features (I don't exactly recall which) needed to be added
-to bpaste.net and I decided to fork LodgeIt and named it pinnwand. That means
-&amp;quot;bulletin board&amp;quot; in English and was fitting for a thing that people put stuff
-on for others to see.&lt;/p&gt;
-&lt;p&gt;In keeping with the theme my other projects that involve pinnwand are named
-in similar vein: &lt;a class="reference external" href="https://supakeen.com/project/steck/"&gt;steck&lt;/a&gt; (to stick) a client for sticking stuff on the pinnwand
-and &lt;a class="reference external" href="https://supakeen.com/project/nagel/"&gt;nagel&lt;/a&gt; (a thumbtack) as the library to interface with the pinnwand.&lt;/p&gt;
-&lt;p&gt;This fork then went on to be hosted at both bpaste.net and on a separate domain
-for the #python channel on Freenode. Someone else maintained that instance of
-pinnwand. The pastebin recommended in the channel flip flopped between the
-channel instance and bpaste.net.&lt;/p&gt;
-&lt;p&gt;A few years later I rekindled my love for the project and decided to start from
-scratch. With this a lot of history was lost but here we are at version 1.0.0
-and here to stay!&lt;/p&gt;
-&lt;/div&gt;
-</content><category term="python"></category><category term="pinnwand"></category></entry><entry><title>The plans for 2020</title><link href="https://supakeen.com/weblog/stuff-for-2020.html" rel="alternate"></link><published>2020-01-01T12:00:00+01:00</published><updated>2020-01-01T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-01-01:/weblog/stuff-for-2020.html</id><summary type="html">&lt;p class="first last"&gt;Stuff I'll be working on in 2020.&lt;/p&gt;
-</summary><content type="html">&lt;p&gt;Not quite the blog post I'd normally write. This one is mostly for me to have
-a look at every now and then and see if I'm achieving what I want to do. A
-very long New Years resolution!&lt;/p&gt;
-&lt;p&gt;For 2020 I'd like to extend the &lt;a class="reference external" href="https://supakeen.com"&gt;supakeen.com&lt;/a&gt; domain quite a bit. Fashioning
-it like the olden homepages back when not everything was hosted on social
-networks and the like. I'll be adding my &lt;a class="reference external" href="https://supakeen.com/notes"&gt;notes&lt;/a&gt; on technical things and a
-&lt;a class="reference external" href="https://supakeen.com/recipes"&gt;recipes&lt;/a&gt; section to this website.&lt;/p&gt;
-&lt;p&gt;Since I also build the &lt;a class="reference external" href="https://supakeen.com/project/gb"&gt;gb&lt;/a&gt; project I've decided to make all this content
-available over Gopher as well. That'll make sure I have to keep working on
-making &lt;a class="reference external" href="https://supakeen.com/project/gb"&gt;gb&lt;/a&gt; the best gopher server out there.&lt;/p&gt;
-&lt;p&gt;Aside from that I'm looking into setting up a small FTP server as well where
-my content can be downloaded. In case you want to archive this website.&lt;/p&gt;
-&lt;p&gt;For &lt;a class="reference external" href="https://supakeen.com/project/pinnwand"&gt;pinnwand&lt;/a&gt; you'll see the biggest changes in the shortest amount of time. A
-branch containing multi-file pastes is almost ready to go. This will allow
-users to paste multiple files in one go through the web interface or API if
-they want. There will probably be room to create a small &lt;a class="reference external" href="https://supakeen.com/project/pinnwand"&gt;pinnwand&lt;/a&gt; client
-project if I can think of a good name.&lt;/p&gt;
-&lt;p&gt;The &lt;a class="reference external" href="https://supakeen.com/project/unchaind"&gt;unchaind&lt;/a&gt; project will stay dead as I no longer play the game. I'm thinking
-of archiving it but I'll have to talk to other contributors first.&lt;/p&gt;
-&lt;p&gt;That's it for 2020, keeping the plans small means they're hopefully more
-achievable.&lt;/p&gt;
-&lt;p&gt;A stretch goal would be to add a book review section, as if!&lt;/p&gt;
-</content><category term="life"></category></entry><entry><title>Dangers in Python's standard library</title><link href="https://supakeen.com/weblog/dangers-in-pythons-standard-library.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/dangers-in-pythons-standard-library.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
+</content><category term="howto"></category><category term="auxiliary"></category></entry><entry><title>Dangers in Python's standard library</title><link href="https://supakeen.com/weblog/dangers-in-pythons-standard-library.html" rel="alternate"></link><published>2019-01-16T12:00:00+01:00</published><updated>2019-01-16T12:00:00+01:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2019-01-16:/weblog/dangers-in-pythons-standard-library.html</id><summary type="html">&lt;p class="first last"&gt;Things to be wary of when using Python's standard library.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;The Python programming language comes with &amp;quot;Batteries Included&amp;quot;. A philosophy
 to ship a comprehensive, immediately-useful standard library. However, since
 the standard library comes with Python it is hard to refactor for older code
@@ -386,9 +185,9 @@ commonly used improperly. Consider if the following is the splitting you want:&l
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;shlex&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;subprocess&lt;/span&gt;
 
-&lt;span class="n"&gt;user_input&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;shlex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo;echo${IFS}hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;echo {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;user_input&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;shlex&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;split&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;foo;echo$&lt;/span&gt;&lt;span class="si"&gt;{IFS}&lt;/span&gt;&lt;span class="s2"&gt;hello&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;echo &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user_input&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 &lt;span class="c1"&gt;# b&amp;#39;foo\nhello\n&amp;#39;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -406,9 +205,9 @@ While a powerful language that likely doesn't lead to direct exploitation one
 does have to take care when writing these.&lt;/p&gt;
 &lt;p&gt;A possible attack is a denial of service by turning your own regular
 expressions against you. Note the timings below.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;{}!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="mf"&gt;1.4856852590019116&lt;/span&gt;
-&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;{}!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;timeit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;import re;re.match(&amp;#39;^(a+)+$&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;!&amp;#39;)&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="mf"&gt;40.852224354999635&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -435,7 +234,7 @@ use the &lt;a class="reference external" href="https://docs.python.org/3/library
 &lt;p&gt;It is a good idea to always use &lt;tt class="docutils literal"&gt;secrets&lt;/tt&gt; or &lt;tt class="docutils literal"&gt;SystemRandom&lt;/tt&gt; unless you are
 certain you don't need it, instead of assuming the reverse.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="stdlib"></category></entry><entry><title>Upgrading a reverse shell?</title><link href="https://supakeen.com/weblog/upgrading-a-reverse-shell.html" rel="alternate"></link><published>2018-09-08T12:00:00+02:00</published><updated>2018-09-08T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-09-08:/weblog/upgrading-a-reverse-shell.html</id><summary type="html">&lt;p class="first last"&gt;Some notes on gaining and upgrading reverse shells.&lt;/p&gt;
+</content><category term="python"></category><category term="python"></category><category term="stdlib"></category></entry><entry><title>Upgrading a reverse shell?</title><link href="https://supakeen.com/weblog/upgrading-a-reverse-shell.html" rel="alternate"></link><published>2018-09-08T12:00:00+02:00</published><updated>2018-09-08T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-09-08:/weblog/upgrading-a-reverse-shell.html</id><summary type="html">&lt;p class="first last"&gt;Some notes on gaining and upgrading reverse shells.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;You've found a reverse shell but it's not behaving like a proper shell. You
 can't run &lt;cite&gt;su&lt;/cite&gt; because it requires a tty and you might not have a prompt. This
 is my quick summary on my notes on upgrading a reverse shell to something
@@ -454,7 +253,7 @@ script.&lt;/p&gt;
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;PingAsAService&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tornado&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;web&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;RequestHandler&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="n"&gt;host&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_query_argument&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;host&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-        &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ping {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;ping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;subprocess&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_output&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ping &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ping&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
 
@@ -579,7 +378,7 @@ be.&lt;/p&gt;
 functional reverse shell. You can run tmux or screen, or any other application
 your heart desires.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="shell"></category><category term="tty"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/executing-commands-safely-from-python.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/executing-commands-safely-from-python.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
+</content><category term="hack"></category><category term="shell"></category><category term="tty"></category></entry><entry><title>Executing commands safely from Python</title><link href="https://supakeen.com/weblog/executing-commands-safely-from-python.html" rel="alternate"></link><published>2018-05-25T12:00:00+02:00</published><updated>2018-05-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2018-05-25:/weblog/executing-commands-safely-from-python.html</id><summary type="html">&lt;p class="first last"&gt;A introduction on how to use Python to execute subcommands safely.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Python provides multiple ways to execute commands on the system it is running
 on. Some of them inherently unsafe, some of them safe in nature but easy to
 use in an unsafe way.&lt;/p&gt;
@@ -602,14 +401,14 @@ to restart services. To do that it uses a function to execute commands called
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
-&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart {}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;systemctl restart &lt;/span&gt;&lt;span class="si"&gt;{}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;If we call our program with &lt;cite&gt;python service.py nginx&lt;/cite&gt; the string that gets put
 into our &lt;cite&gt;os.system&lt;/cite&gt;-call will be the string &lt;cite&gt;systemctl restart nginx&lt;/cite&gt; and all
 is good in the world. However, if someone calls our program as
 &lt;cite&gt;python service.py 'nginx;cat /etc/passwd'&lt;/cite&gt; our executed command will become:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;systemctl restart nginx&lt;span class="p"&gt;;&lt;/span&gt;
-cat /etc/passwd
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;systemctl&lt;span class="w"&gt; &lt;/span&gt;restart&lt;span class="w"&gt; &lt;/span&gt;nginx&lt;span class="p"&gt;;&lt;/span&gt;
+cat&lt;span class="w"&gt; &lt;/span&gt;/etc/passwd
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Where I have added the newline myself for clarity. Our program was not intended to
 be reading the &lt;cite&gt;/etc/passwd&lt;/cite&gt; file at all! This is a command injection and it comes
@@ -724,4 +523,4 @@ rules for shells. Specifically you could try to use &lt;cite&gt;shlex.quote&lt;/
 you fill in. Reasoning about what is 'safe' or 'unsafe' becomes very difficult in
 this context.&lt;/p&gt;
 &lt;/div&gt;
-</content><category term="python"></category><category term="subprocess"></category></entry></feed>
+</content><category term="python"></category><category term="python"></category><category term="subprocess"></category></entry></feed>

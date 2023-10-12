@@ -5,7 +5,8 @@
         <title>Executing commands safely from Python</title>
         <link rel="shortcut icon" type="image/icon" href="theme/images/favicon.ico"/>
         <link rel="stylesheet" href="/style.css">
-        <link rel="stylesheet" href="./theme/css/pygments.css" />
+        <link rel="stylesheet" href="https://supakeen.com/weblog/theme/css/pygments.css" />
+        <link href="https://supakeen.com/weblog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="supakeen's weblog Atom Feed" />
     </head>
 
     <body>
@@ -16,7 +17,7 @@
                     <li><a href="/weblog">weblog</a></li>
                 </ul>
             </nav>
-            <h1><a href="./">supakeen's weblog </a></h1>
+            <h1><a href="https://supakeen.com/weblog/">supakeen's weblog </a></h1>
         </header>
 <section>
     <article>
@@ -49,8 +50,8 @@ to restart services. To do that it uses a function to execute commands called
 into our <cite>os.system</cite>-call will be the string <cite>systemctl restart nginx</cite> and all
 is good in the world. However, if someone calls our program as
 <cite>python service.py 'nginx;cat /etc/passwd'</cite> our executed command will become:</p>
-<div class="highlight"><pre><span></span>systemctl restart nginx<span class="p">;</span>
-cat /etc/passwd
+<div class="highlight"><pre><span></span>systemctl<span class="w"> </span>restart<span class="w"> </span>nginx<span class="p">;</span>
+cat<span class="w"> </span>/etc/passwd
 </pre></div>
 <p>Where I have added the newline myself for clarity. Our program was not intended to
 be reading the <cite>/etc/passwd</cite> file at all! This is a command injection and it comes
@@ -169,7 +170,7 @@ this context.</p>
     </article>
 </section>
         <footer>
-            <p>Go back <a href="/">home</a> or find me on <a href="https://twitter.com/supakeen">Twitter</a> if I got something wrong.</p>
+            <p>Go back <a href="/">home</a>.
         </footer>
     </body>
 </html>
