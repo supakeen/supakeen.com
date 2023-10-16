@@ -3,20 +3,22 @@
 </summary><content type="html">&lt;p&gt;In operating system land things are always changing. You might have heard about
 image based distributions such as &lt;a class="reference external" href="https://www.endlessos.org/"&gt;Endless OS&lt;/a&gt;, &lt;a class="reference external" href="https://fedoraproject.org/iot/"&gt;Fedora IoT&lt;/a&gt;,
 &lt;a class="reference external" href="https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/edge-computing)"&gt;RHEL for Edge&lt;/a&gt;, &lt;a class="reference external" href="https://ubuntu.com/core"&gt;Ubuntu Core&lt;/a&gt; and others. Perhaps you've heard other terms
-such as &lt;a class="reference external" href="https://uapi-group.org/specifications/specs/unified_kernel_image/"&gt;Unified Kernel Images&lt;/a&gt; (UKI) or &lt;a class="reference external" href="https://uapi-group.org/specifications/specs/discoverable_disk_image/"&gt;Discoverable Disk Images&lt;/a&gt; (DDI).
-Let's get into what image based Linux is and what its possible benefits are to
-you.&lt;/p&gt;
+such as &lt;a class="reference external" href="https://uapi-group.org/specifications/specs/unified_kernel_image/"&gt;Unified Kernel Images&lt;/a&gt; (UKI) or &lt;a class="reference external" href="https://uapi-group.org/specifications/specs/discoverable_disk_image/"&gt;Discoverable Disk Images&lt;/a&gt; (DDI) and
+wondered what that's about. Let's get into what image based Linux is and what its
+possible benefits are to you.&lt;/p&gt;
+&lt;p&gt;This post is the introduction part to a series I'm writing about image based Linux
+systems, their advantages and disadvantages and how to build and test them.&lt;/p&gt;
 &lt;p&gt;Before we get started on the difference let me describe a more traditional
-Linux distribution. You install it from an ISO and update packages with that
-distributions package manager. If you have a lot of machines it might be hard
-to decide which state they are in. They all have different packages installed
-and are perhaps in different states regarding the updates they've installed
-and when they've last rebooted to use a new kernel.&lt;/p&gt;
+package based Linux distribution. You install it from an ISO and update packages
+with that distributions package manager. If you have a lot of machines it might
+be difficult to track which state they are in. They all have different packages
+installed and are perhaps in different states regarding the updates they've
+installed and when they've last rebooted to use a new kernel.&lt;/p&gt;
 &lt;p&gt;With an image based distribution the system as a whole is built and updated as
 a single thing. A system being on a certain version means you know the state of
 everything on the system.&lt;/p&gt;
 &lt;p&gt;Image based distributions are useful in situations where you run many machines
-in many locations. Usually called the 'device edge'. Think a factory full of
+in many locations, often called the 'device edge'. Think of a factory full of
 single board computers that collect sensor data. Point-of-sale systems.
 Information screens. Cars. Places where it isn't immediately feasible to send
 an engineer if something breaks. Image based distributions are also finding
@@ -28,7 +30,12 @@ a broken update to a previously known good image.&lt;/p&gt;
 &lt;p&gt;Image based distributions often have a focus on providing easy provisioning of
 devices through things such as &lt;a class="reference external" href="https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html"&gt;FDO&lt;/a&gt; or &lt;a class="reference external" href="https://coreos.github.io/ignition/"&gt;Ignition&lt;/a&gt;. Try to provide a secure
 physical environment through dm/fsverity, secure boot, TPMs, and UKI. And a
-solid update cycle that can always restore to a previous state.&lt;/p&gt;
+solid update cycle that can always restore to a previous state. Don't worry if
+you're not yet familiar with this forest of abbreviations and concepts, these will
+be the subjects of followup posts.&lt;/p&gt;
+&lt;p&gt;In the next post I'll talk about the ways disk contents are managed in image based
+distributions. This is one of the important considerations that sets apart an image
+based distribution from a traditional one.&lt;/p&gt;
 </content><category term="linux"></category><category term="os"></category><category term="image-based"></category></entry><entry><title>A varnishncsa logfile per host</title><link href="https://supakeen.com/weblog/varnishncsa-per-host.html.html" rel="alternate"></link><published>2020-04-25T12:00:00+02:00</published><updated>2020-04-25T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2020-04-25:/weblog/varnishncsa-per-host.html.html</id><summary type="html">&lt;p class="first last"&gt;How to configure varnishncsa logging per host.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;&lt;a class="reference external" href="https://varnish-cache.org/"&gt;Varnish&lt;/a&gt; is a caching proxy server in quite widespread use. Its common role is
 to set in between your load balancer and web servers to lessen the requests
