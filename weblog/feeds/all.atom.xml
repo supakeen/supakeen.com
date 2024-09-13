@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2023-08-09T12:00:00+02:00</updated><entry><title>What is Image Based Linux?</title><link href="https://supakeen.com/weblog/what-is-image-based-linux.html" rel="alternate"></link><published>2023-08-09T12:00:00+02:00</published><updated>2023-08-09T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2023-08-09:/weblog/what-is-image-based-linux.html</id><summary type="html">&lt;p class="first last"&gt;What is Image Based Linux?&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>supakeen's weblog</title><link href="https://supakeen.com/weblog/" rel="alternate"></link><link href="https://supakeen.com/weblog/feeds/all.atom.xml" rel="self"></link><id>https://supakeen.com/weblog/</id><updated>2024-09-13T12:00:00+02:00</updated><entry><title>Building an Interactive Installer for bootc</title><link href="https://supakeen.com/weblog/building-interactive-installer-bootc.html" rel="alternate"></link><published>2024-09-13T12:00:00+02:00</published><updated>2024-09-13T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2024-09-13:/weblog/building-interactive-installer-bootc.html</id><summary type="html">&lt;p class="first last"&gt;Building an Interactive Installer for bootc&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;A question popped up today on the #bootc:fedoraproject.org Matrix channel on
+how to create an interactive installer for a bootable container. This is a quick
+write up of how to use some details in &lt;a class="reference external" href="https://github.com/osbuild/bootc-image-builder"&gt;bootc-image-builder&lt;/a&gt; to generate an
+interactive &lt;a class="reference external" href="https://docs.fedoraproject.org/en-US/quick-docs/anaconda-introduction/"&gt;Anaconda&lt;/a&gt; ISO.&lt;/p&gt;
+&lt;p&gt;You can provide &lt;a class="reference external" href="https://github.com/osbuild/bootc-image-builder?tab=readme-ov-file#anaconda-iso-installer-options-installer-mapping"&gt;custom kickstarts&lt;/a&gt; in &lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;bootc-image-builder&lt;/span&gt;&lt;/tt&gt;. The README
+mentions that:&lt;/p&gt;
+&lt;blockquote&gt;
+Note that bootc-image-builder will automatically add the command that installs the container image (&lt;tt class="docutils literal"&gt;ostreecontainer&lt;/tt&gt; ...), so this line or any line that conflicts with it should not be included. See the relevant Kickstart documentation for more information. No other kickstart commands are added by bootc-image-builder in this case, so it is the responsibility of the user to provide all other commands (for example, for partitioning, network, language, etc).&lt;/blockquote&gt;
+&lt;p&gt;This implies that if we provide an empty custom kickstart we will end up with
+an incomplete kickstart containing only the &lt;tt class="docutils literal"&gt;ostreecontainer&lt;/tt&gt; directive:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# see https://github.com/osbuild/bootc-image-builder?tab=readme-ov-file#anaconda-iso-installer-options-installer-mapping&lt;/span&gt;
+&lt;span class="k"&gt;[customizations.installer.kickstart]&lt;/span&gt;
+&lt;span class="n"&gt;contents&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And then build the image:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo podman run \
+    --rm \
+    -it \
+    --privileged \
+    --pull=newer \
+    --security-opt label=type:unconfined_t \
+    -v $(pwd)/config.toml:/config.toml:ro \
+    -v $(pwd)/output:/output \
+    quay.io/centos-bootc/bootc-image-builder:latest \
+    --type anaconda-iso \
+    quay.io/centos-bootc/centos-bootc:stream9
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This will put Anaconda into interactive mode so the user can provide the missing
+information. You can also enable &lt;a class="reference external" href="https://github.com/osbuild/bootc-image-builder?tab=readme-ov-file#anaconda-iso-installer-modules"&gt;extra modules&lt;/a&gt; for Anaconda though I haven't
+tried so myself.&lt;/p&gt;
+&lt;img alt="" src="anaconda-bootc.png" /&gt;
+&lt;p&gt;Note that you will need to create partitions and label &lt;cite&gt;/boot&lt;/cite&gt; as
+&lt;cite&gt;boot&lt;/cite&gt; so the installed system can find its boot partition.&lt;/p&gt;
+</content><category term="linux"></category><category term="os"></category><category term="bootc"></category><category term="anaconda"></category></entry><entry><title>What is Image Based Linux?</title><link href="https://supakeen.com/weblog/what-is-image-based-linux.html" rel="alternate"></link><published>2023-08-09T12:00:00+02:00</published><updated>2023-08-09T12:00:00+02:00</updated><author><name>supakeen</name></author><id>tag:supakeen.com,2023-08-09:/weblog/what-is-image-based-linux.html</id><summary type="html">&lt;p class="first last"&gt;What is Image Based Linux?&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;In operating system land things are always changing. You might have heard about
 image based distributions such as &lt;a class="reference external" href="https://www.endlessos.org/"&gt;Endless OS&lt;/a&gt;, &lt;a class="reference external" href="https://fedoraproject.org/iot/"&gt;Fedora IoT&lt;/a&gt;,
 &lt;a class="reference external" href="https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/edge-computing)"&gt;RHEL for Edge&lt;/a&gt;, &lt;a class="reference external" href="https://ubuntu.com/core"&gt;Ubuntu Core&lt;/a&gt; and others. Perhaps you've heard other terms

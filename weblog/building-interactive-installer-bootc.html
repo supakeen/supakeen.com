@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Building an Interactive Installer for bootc</title>
+        <link rel="shortcut icon" type="image/icon" href="theme/images/favicon.ico"/>
+        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="https://supakeen.com/weblog/theme/css/pygments.css" />
+        <link href="https://supakeen.com/weblog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="supakeen's weblog Atom Feed" />
+    </head>
+
+    <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="/">homepage</a></li>
+                    <li><a href="/weblog">weblog</a></li>
+                </ul>
+            </nav>
+            <h1><a href="https://supakeen.com/weblog/">supakeen's weblog </a></h1>
+        </header>
+<section>
+    <article>
+        <h1>Building an Interactive Installer for bootc</h1>
+        <p>A question popped up today on the #bootc:fedoraproject.org Matrix channel on
+how to create an interactive installer for a bootable container. This is a quick
+write up of how to use some details in <a class="reference external" href="https://github.com/osbuild/bootc-image-builder">bootc-image-builder</a> to generate an
+interactive <a class="reference external" href="https://docs.fedoraproject.org/en-US/quick-docs/anaconda-introduction/">Anaconda</a> ISO.</p>
+<p>You can provide <a class="reference external" href="https://github.com/osbuild/bootc-image-builder?tab=readme-ov-file#anaconda-iso-installer-options-installer-mapping">custom kickstarts</a> in <tt class="docutils literal"><span class="pre">bootc-image-builder</span></tt>. The README
+mentions that:</p>
+<blockquote>
+Note that bootc-image-builder will automatically add the command that installs the container image (<tt class="docutils literal">ostreecontainer</tt> ...), so this line or any line that conflicts with it should not be included. See the relevant Kickstart documentation for more information. No other kickstart commands are added by bootc-image-builder in this case, so it is the responsibility of the user to provide all other commands (for example, for partitioning, network, language, etc).</blockquote>
+<p>This implies that if we provide an empty custom kickstart we will end up with
+an incomplete kickstart containing only the <tt class="docutils literal">ostreecontainer</tt> directive:</p>
+<div class="highlight"><pre><span></span><span class="c1"># see https://github.com/osbuild/bootc-image-builder?tab=readme-ov-file#anaconda-iso-installer-options-installer-mapping</span>
+<span class="k">[customizations.installer.kickstart]</span>
+<span class="n">contents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</pre></div>
+<p>And then build the image:</p>
+<div class="highlight"><pre><span></span>sudo podman run \
+    --rm \
+    -it \
+    --privileged \
+    --pull=newer \
+    --security-opt label=type:unconfined_t \
+    -v $(pwd)/config.toml:/config.toml:ro \
+    -v $(pwd)/output:/output \
+    quay.io/centos-bootc/bootc-image-builder:latest \
+    --type anaconda-iso \
+    quay.io/centos-bootc/centos-bootc:stream9
+</pre></div>
+<p>This will put Anaconda into interactive mode so the user can provide the missing
+information. You can also enable <a class="reference external" href="https://github.com/osbuild/bootc-image-builder?tab=readme-ov-file#anaconda-iso-installer-modules">extra modules</a> for Anaconda though I haven't
+tried so myself.</p>
+<img alt="" src="anaconda-bootc.png" />
+<p>Note that you will need to create partitions and label <cite>/boot</cite> as
+<cite>boot</cite> so the installed system can find its boot partition.</p>
+
+    </article>
+</section>
+        <footer>
+            <p>Go back <a href="/">home</a>.
+        </footer>
+    </body>
+</html>
