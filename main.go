@@ -1,49 +1,59 @@
 package main
 
 import (
-    "net/http"
-    "time"
-    "embed"
+	"embed"
+	"fmt"
+	"io/fs"
+	"net/http"
+	"time"
 
-    "github.com/go-chi/chi/v5"
-    "github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 func main() {
-    r := chi.NewRouter()
+	r := chi.NewRouter()
 
-    r.Use(middleware.RequestID)
-    r.Use(middleware.RealIP)
-    r.Use(middleware.Logger)
-    r.Use(middleware.Recoverer)
+	r.Use(middleware.RequestID)
+	r.Use(middleware.RealIP)
+	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
 
-    r.Use(middleware.Timeout(1 * time.Second))
+	r.Use(middleware.Timeout(1 * time.Second))
 
-    Root(r)
+	RouteRoot(r)
 
-    http.ListenAndServe(":3000", r)
+	http.ListenAndServe(":3000", r)
 }
 
-func Root(r chi.Router) {
-	Static(r)
-	HTML(r)
+func RouteRoot(r chi.Router) {
+	RouteStatic(r)
+	RouteHTML(r)
 }
 
-//go:embed favicon.ico resume style.css
-var StaticFilesystem embed.FS
-var StaticServer = http.FileServer(http.FS(StaticFilesystem))
+//go:embed embed
+var EmbeddedFileSystem embed.FS
 
-func Static(r chi.Router) {
+func GetEmbeddedFileSystem(sub string) http.FileSystem {
+	fs, err := fs.Sub(EmbeddedFileSystem, fmt.Sprintf("embed/%s", sub))
+
+	if err != nil {
+		panic(err)
+	}
+
+	return http.FS(fs)
+}
+
+func RouteStatic(r chi.Router) {
+	StaticServer := http.FileServer(GetEmbeddedFileSystem("static"))
+
 	r.Handle("/favicon.ico", StaticServer)
 	r.Handle("/style.css", StaticServer)
-	r.Handle("/static/*", StaticServer)
 	r.Handle("/resume/*", StaticServer)
 }
 
-//go:embed index.html weblog
-var HTMLFilesystem embed.FS
-var HTMLServer = http.FileServer(http.FS(HTMLFilesystem))
+func RouteHTML(r chi.Router) {
+	HTMLServer := http.FileServer(GetEmbeddedFileSystem("html"))
 
-func HTML(r chi.Router) {
-    r.Handle("/*", HTMLServer)
+	r.Handle("/*", HTMLServer)
 }
