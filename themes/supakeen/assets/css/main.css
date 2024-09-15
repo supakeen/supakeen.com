@@ -82,28 +82,28 @@ html, body, main {
 
 @font-face {
   font-family: "Standard Galactic Alphabet";
-  src: url("/weblog/theme/fonts/sga.ttf"); }
+  src: url("/fnt/sga.ttf"); }
 
 @font-face {
   font-family: "Keen 4";
-  src: url("/weblog/theme/fonts/keen4.ttf"); }
+  src: url("/fnt/keen4.ttf"); }
 
 @font-face {
   font-family: "Rasa";
   font-style: normal;
   font-weight: 400;
-  src: url("/weblog/theme/fonts/rasa-regular.ttf"); }
+  src: url("/fnt/rasa-regular.ttf"); }
 
 @font-face {
   font-family: "Inconsolata";
   font-style: normal;
   font-weight: 400;
-  src: url("/weblog/theme/fonts/inconsolata-regular.ttf"); }
+  src: url("/fnt/inconsolata-regular.ttf"); }
 
 html {
   background-color: #222;
   background-attachment: fixed;
-  background-image: linear-gradient(to bottom, #222 0%, #222 75%, rgba(34, 34, 34, 0.9) 100%), url("/weblog/theme/images/background.png");
+  background-image: linear-gradient(to bottom, #222 0%, #222 75%, rgba(34, 34, 34, 0.9) 100%), url("/img/background.png");
   color: #54fc54;
   min-height: 100%; }
 
@@ -162,7 +162,7 @@ ul {
   margin: 0 1rem;
   list-style: none; }
   ul li {
-    background-image: url("/weblog/theme/images/asset1.png");
+    background-image: url("/img/asset1.png");
     background-size: 15px;
     background-position: top left;
     background-repeat: no-repeat;
@@ -209,7 +209,7 @@ blockquote {
   padding: 2rem 2rem 2rem 12rem;
   border: 1rem solid #3ea8a7;
   margin: 0;
-  background-image: url("/weblog/theme/images/keen1.png");
+  background-image: url("/img/keen1.png");
   background-repeat: no-repeat;
   background-position: bottom left;
   height: 165px;
