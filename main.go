@@ -49,7 +49,6 @@ func RouteStatic(r chi.Router) {
 
 	r.Handle("/favicon.ico", StaticServer)
 	r.Handle("/resume/*", StaticServer)
-	r.Handle("/style.css", StaticServer)
 
 	r.Handle("/static/*", http.StripPrefix("/static", StaticServer))
 }
