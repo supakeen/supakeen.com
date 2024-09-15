@@ -103,7 +103,7 @@ html, body, main {
 html {
   background-color: #222;
   background-attachment: fixed;
-  background-image: linear-gradient(to bottom, #222 0%, #222 75%, rgba(34, 34, 34, 0.9) 100%), url("/weblog/theme/images/background.png");
+  background-image: linear-gradient(to bottom, #222 0%, #222 75%, rgba(34, 34, 34, 0.9) 100%), url("/static/background.png");
   color: #54fc54;
   min-height: 100%; }
 
