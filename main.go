@@ -29,6 +29,7 @@ func main() {
 func RouteRoot(r chi.Router) {
 	RouteHTML(r)
 	RouteStatic(r)
+	RouteResume(r)
 }
 
 //go:embed embed
@@ -47,10 +48,16 @@ func GetEmbeddedFileSystem(sub string) http.FileSystem {
 func RouteStatic(r chi.Router) {
 	StaticServer := http.FileServer(GetEmbeddedFileSystem("static"))
 
-	r.Handle("/favicon.ico", StaticServer)
 	r.Handle("/resume/*", StaticServer)
 
+	r.Handle("/favicon.ico", StaticServer)
 	r.Handle("/static/*", http.StripPrefix("/static", StaticServer))
+}
+
+func RouteResume(r chi.Router) {
+	ResumeServer := http.FileServer(GetEmbeddedFileSystem("resume"))
+
+	r.Handle("/resume/*", http.StripPrefix("/resume", ResumeServer))
 }
 
 func RouteHTML(r chi.Router) {
