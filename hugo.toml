@@ -1,4 +1,14 @@
 baseURL = 'https://supakeen.com/'
 languageCode = 'en-us'
-title = 'supakeens homepage'
+title = "supakeen's homepage"
 theme = 'supakeen'
+
+[[menus.main]]
+name = 'homepage'
+pageRef = '/'
+weight = 10
+
+[[menus.main]]
+name = 'weblog'
+pageRef = '/weblog'
+weight = 20
