@@ -48,10 +48,10 @@ func RouteStatic(r chi.Router) {
 	StaticServer := http.FileServer(GetEmbeddedFileSystem("static"))
 
 	r.Handle("/favicon.ico", StaticServer)
-	r.Handle("/style.css", StaticServer)
-	r.Handle("/static/background.png", http.StripPrefix("/static", StaticServer))
-	r.Handle("/static/font/*", http.StripPrefix("/static", StaticServer))
 	r.Handle("/resume/*", StaticServer)
+	r.Handle("/style.css", StaticServer)
+
+	r.Handle("/static/*", http.StripPrefix("/static", StaticServer))
 }
 
 func RouteHTML(r chi.Router) {
