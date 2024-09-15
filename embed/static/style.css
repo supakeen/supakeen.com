@@ -82,23 +82,23 @@ html, body, main {
 
 @font-face {
   font-family: "Standard Galactic Alphabet";
-  src: url("/weblog/theme/fonts/sga.ttf"); }
+  src: url("/static/font/sga.ttf"); }
 
 @font-face {
   font-family: "Keen 4";
-  src: url("/weblog/theme/fonts/keen4.ttf"); }
+  src: url("/static/font/keen4.ttf"); }
 
 @font-face {
   font-family: "Rasa";
   font-style: normal;
   font-weight: 400;
-  src: url("/weblog/theme/fonts/rasa-regular.ttf"); }
+  src: url("/static/font/rasa-regular.ttf"); }
 
 @font-face {
   font-family: "Inconsolata";
   font-style: normal;
   font-weight: 400;
-  src: url("/weblog/theme/fonts/inconsolata-regular.ttf"); }
+  src: url("/static/font/inconsolata-regular.ttf"); }
 
 html {
   background-color: #222;
