@@ -8,9 +8,9 @@ aliases:
 ---
 
 In operating system land things are always changing. You might have heard about
-image based distributions such as `Endless OS`_, `Fedora IoT`_,
-`RHEL for Edge`_, `Ubuntu Core`_ and others. Perhaps you've heard other terms
-such as `Unified Kernel Images`_ (UKI) or `Discoverable Disk Images`_ (DDI) and
+image based distributions such as [Endless OS](https://www.endlessos.org), [Fedora IoT](https://fedoraproject.org/iot/),
+[RHEL for Edge](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/edge-computing), [Ubuntu Core](https://ubuntu.com/core) and others. Perhaps you've heard other terms
+such as [Unified Kernel Images](https://uapi-group.org/specifications/specs/unified_kernel_image/) (UKI) or [Discoverable Disk Images](https://uapi-group.org/specifications/specs/discoverable_disk_image/) (DDI) and
 wondered what that's about. Let's get into what image based Linux is and what its
 possible benefits are to you.
 
@@ -41,7 +41,7 @@ form of A/B booting and monitored boot. This means that they can roll back from
 a broken update to a previously known good image.
 
 Image based distributions often have a focus on providing easy provisioning of
-devices through things such as FDO_ or Ignition_. Try to provide a secure
+devices through things such as [FDO](https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html) or [Ignition](https://coreos.github.io/ignition/). Try to provide a secure
 physical environment through dm/fsverity, secure boot, TPMs, and UKI. And a
 solid update cycle that can always restore to a previous state. Don't worry if
 you're not yet familiar with this forest of abbreviations and concepts, these will
@@ -50,12 +50,3 @@ be the subjects of followup posts.
 In the next post I'll talk about the ways disk contents are managed in image based
 distributions. This is one of the important considerations that sets apart an image
 based distribution from a traditional one.
-
-.. _`Endless OS`: https://www.endlessos.org/
-.. _`Fedora IoT`: https://fedoraproject.org/iot/
-.. _`RHEL for Edge`: https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/edge-computing)
-.. _`Ubuntu Core`: https://ubuntu.com/core
-.. _`Unified Kernel Images`: https://uapi-group.org/specifications/specs/unified_kernel_image/
-.. _`Discoverable Disk Images`: https://uapi-group.org/specifications/specs/discoverable_disk_image/
-.. _`FDO`: https://fidoalliance.org/specs/FDO/FIDO-Device-Onboard-RD-v1.0-20201202.html
-.. _`Ignition`: https://coreos.github.io/ignition/
