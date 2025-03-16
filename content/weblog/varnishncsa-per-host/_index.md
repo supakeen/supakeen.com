@@ -7,13 +7,13 @@ aliases:
   - varnishncsa-per-host.html
 ---
 
-Varnish_ is a caching proxy server in quite widespread use. Its common role is
+[Varnish](https://varnish-cache.org/) is a caching proxy server in quite widespread use. Its common role is
 to set in between your load balancer and web servers to lessen the requests
 ending up at the latter.
 
 A often recurring situation is that your Varnish instance serves multiple
 different hostnames. If you want to use some of the older tools such as
-Webalizer_ or awstats_ to process your logs you probably need a log file per
+[Webalizer](http://www.webalizer.org/) or [awstats](https://awstats.sourceforge.io/) to process your logs you probably need a log file per
 hostname.
 
 For this we can use `varnishncsa` a utility that comes with Varnish to
@@ -102,7 +102,3 @@ Change: 2020-04-25 09:34:43.891850255 +0000
 ```
 
 That's it! You can now use this file any way you want. Good luck.
-
-.. _Varnish: https://varnish-cache.org/
-.. _webalizer: http://www.webalizer.org/
-.. _awstats: https://awstats.sourceforge.io/
