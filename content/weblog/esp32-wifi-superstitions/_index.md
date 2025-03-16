@@ -7,7 +7,7 @@ aliases:
   - esp32-wifi-superstitions.html
 ---
 
-The [ESP32](https://www.espressif.com/en/products/socs/esp32) is a popular microcontroller to use for do-it-yourself home automation, sensors, and a variety of other bits and bobs that you might want to take care of around the house. It's the successor to the venerable [ESP8266](https://www.espressif.com/en/products/socs/esp8266) which has found its way into many of our WiFi connected devices (seriously, open up a device and changes are relatively large that you'll find one).
+The [ESP32](https://www.espressif.com/en/products/socs/esp32) is a popular microcontroller to use for do-it-yourself home automation, sensors, and a variety of other bits and bobs that you might want to take care of around the house. It's the successor to the venerable [ESP8266](https://www.espressif.com/en/products/socs/esp8266) which has found its way into many of our WiFi connected devices (seriously, open up a device and chances are relatively large that you'll find one).
 
 After having done quite a few projects based on the ESP32 in the [Arduino](https://www.arduino.cc/) and [esp-idf](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html) frameworks I did start to notice some pecularities with my deployed devices (fancy wording for the one in my electrical cabinet that's *supposed* to send the electrical usage data somewhere and a hodgepodge of sensor boards around the house, mostly the *excellent* [Snuffelaar](https://revspace.nl/Snuffelaar) by [Sebastius](https://tweakers.net/reviews/8876/tweaker-sebastius-over-zijn-soldeerworkshops-en-reparatieprojecten.html) with firmware written by [Juerd](https://github.com/juerd)).
 
