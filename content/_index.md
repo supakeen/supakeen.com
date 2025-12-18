@@ -24,7 +24,6 @@ Some of my open source projects both in software and hardware. I program mostly 
 
 - [pinnwand](https://github.com/supakeen/pinnwand) a pastebin in Python
 - [steck](https://github.com/supakeen/steck) a client for pinnwand in Python.
-- [gb](https://github.com/gopherball) a gopher server in Python
 
 ## other projects
 
