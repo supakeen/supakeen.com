@@ -45,14 +45,14 @@ $ sudo podman run \
 
 Would become:
 
-```shell
+```console
 $ sudo podman pull quay.io/centos-bootc/centos-bootc:stream10
 $ sudo image-builder build --bootc-ref quay.io/centos-bootc/centos-bootc:stream10 qcow2
 ```
 
 Building a `bootc`-container into an Anaconda installer.
 
-```
+```console
 $ sudo podman pull quay.io/centos-bootc/centos-bootc:stream10
 $ mkdir output
 $ sudo podman run \
@@ -72,14 +72,14 @@ $ sudo podman run \
 
 Would become:
 
-```shell
+```console
 $ sudo podman pull quay.io/centos-bootc/centos-bootc:stream10
 $ sudo image-builder build --bootc-ref quay.io/centos-bootc/centos-bootc:stream10 anaconda-iso
 ```
 
 The above examples assume that you've done a `dnf install image-builder`. You can also use the same container-based workflow with `image-builder`. Here's an example of using the `image-builder` upstream container to build a `bootc`-container into a qcow2 disk image:
 
-```shell
+```console
 $ sudo podman pull quay.io/centos-bootc/centos-bootc:stream10
 $ sudo podman run \
     --rm \

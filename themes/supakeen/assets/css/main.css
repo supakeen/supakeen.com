@@ -175,9 +175,8 @@ ul {
     padding-bottom: .5rem; }
 
 pre {
+  background: #111 !important;
   border-bottom: 1px solid #54fc54;
-  color: #fefefe;
-  background-color: #272822;
   padding: 1rem;
   font-family: "Inconsolata";
   overflow-x: auto;
@@ -198,6 +197,7 @@ code, cite {
   font-family: "Inconsolata";
   padding: 0 2px;
   color: #fefefe;
+  background: #111;
   font-style: normal; }
 
 footer {

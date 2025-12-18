@@ -12,3 +12,7 @@ weight = 10
 name = 'weblog'
 pageRef = '/weblog'
 weight = 20
+
+[markup]
+  [markup.highlight]
+    noClasses = false
