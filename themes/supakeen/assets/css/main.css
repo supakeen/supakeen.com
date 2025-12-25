@@ -223,6 +223,9 @@ blockquote {
   width: 9999px;
   position: relative; }
 
+blockquote p {
+    color: #333; }
+
 main ul {
   margin-bottom: 1rem; }
 
