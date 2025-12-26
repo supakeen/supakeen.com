@@ -9,15 +9,23 @@ aliases:
 
 With [`image-builder`](https://github.com/osbuild/image-builder-cli) (and [`bootc-image-builder`](https://github.com/osbuild/bootc-image-builder)) you can turn bootable containers into installers. We currently have two different types of installers though most users are likely only familiar with the first. Let's go over the two installer types, their differences, their future, and have some examples.
 
-In a [previous post](/weblog/building-interactive-installer-bootc/) I went over how to build an interactive installer for a bootable container. This used the `anaconda-iso` image type. Let's go into how that is built. In this post I'll be using `image-builder` uncontainerized so my examples are a bit shorter. Feel free to use `bootc-image-builder` instead. You can [read more](/weblog/merging-bootc-image-builder-and-image-builder) about their differences and future.
+In a [previous post](/weblog/building-interactive-installer-bootc/) I went over how to build an interactive installer for a bootable container. This used the `anaconda-iso` image type. Let's go into how that is built. In this post I'll be using `image-builder` uncontainerized for the `bootc-installer` so my examples are a bit shorter and use `bootc-image-builder` for the `anaconda-iso`. Feel free to use `bootc-image-builder` for both instead. You can [read more](/weblog/merging-bootc-image-builder-and-image-builder) about their differences and future.
 
-When `image-builder` is told to build an `anaconda-iso` image type:
+The reason for using `bootc-image-builder` for the `anaconda-iso` is that `image-builder` 44 will [remove the `anaconda-iso` type](https://github.com/osbuild/image-builder-cli/pull/401) as we consider the `anaconda-iso` type deprecated.
+
+When `bootc-image-builder` is told to build an `anaconda-iso` image type:
 
 ```console
 $ sudo podman pull quay.io/centos-bootc/centos-bootc:stream10
-$ sudo image-builder build \
-    --bootc-ref quay.io/centos-bootc/centos-bootc:stream10 \
-    anaconda-iso
+$ mkdir -p output
+$ sudo podman run --rm -it --privileged --pull=newer \
+    --security-opt label=type:unconfined_t \
+    -v ./output:/output \
+    -v /var/lib/containers/storage:/var/lib/containers/storage \
+    quay.io/centos-bootc/bootc-image-builder:latest \
+    --type anaconda-iso \
+    --use-librepo=True \
+    quay.io/centos-bootc/centos-bootc:stream10
 ```
 
 You end up with an ISO with Anaconda on it that will do an unattended install of the container you passed in. But how do we get there?
