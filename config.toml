@@ -16,3 +16,9 @@ weight = 20
 [markup]
   [markup.highlight]
     noClasses = false
+
+[outputs]
+home = ['html']
+section = ['html']
+taxonomy = ['html']
+term = ['html']
