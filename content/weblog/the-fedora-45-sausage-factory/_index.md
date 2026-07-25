@@ -89,7 +89,8 @@ Bodhi gates the release of updates through a feedback and testing cycle. A
 packager submits an update containing one or more builds. That update goes
 through a sequence of states: pending, testing, stable. Users and automated
 tests provide karma (+1 / -1). When an update hits +3 karma or spends enough
-days in testing, it can be pushed to stable.
+days in testing, it will be automatically pushed to stable. If an update hits
++1 karma the maintainer can manually push to stable (+2 for critical path).
 
 Behind the scenes, Bodhi manages all of this through Koji tags. When an update
 moves from testing to stable, Bodhi moves the build from the
@@ -102,8 +103,10 @@ stricter requirements: 14 days in testing instead of 7, and more karma needed.
 Bodhi also integrates with Greenwave and ResultsDB for CI test gating, so
 automated test failures can block an update from reaching stable.
 
-For Rawhide, most of these processes are skipped. Builds go directly from Koji
-into the Rawhide tag, which is why Rawhide occasionally breaks.
+For Rawhide, these processes are configured differently. Non-critical path
+packages go stable immediately unless there's a gating policy (either because
+the package is in the critical path or because the package itself has one) it
+still applies and an update can be held back until things pass.
 
 ## Composing a Release: Pungi
 
@@ -277,8 +280,8 @@ decide what to sync.
 
 Once a compose finishes, [openQA](https://openqa.fedoraproject.org/) picks it
 up for automated testing. openQA is an automated test system for operating
-systems, originally developed by SUSE and adapted for Fedora by Adam
-Williamson and the Fedora QA team.
+systems, originally developed by SUSE and adapted for Fedora by [Adam
+Williamson](https://www.happyassassin.net/) and the Fedora QA team.
 
 openQA boots the compose's images in virtual machines and runs through test
 scenarios: installation workflows (interactive, kickstart, various disk
