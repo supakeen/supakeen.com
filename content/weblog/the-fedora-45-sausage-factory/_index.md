@@ -70,9 +70,7 @@ someone installed something on the builder last week.
 The organizational model is built around **tags**. A tag is a named collection
 of builds. Build targets map an incoming build request to two tags: a build tag
 (which defines the buildroot, the packages available during the build) and a
-destination tag (where the finished build lands). Tags support multiple
-inheritance, so you can layer a Fedora 44 tag on top of a base tag without
-duplicating everything.
+destination tag (where the finished build lands).
 
 Koji doesn't just build RPMs. Through its plugin system and content generators,
 it also orchestrates image builds: Kiwi images via the `kiwiBuild` task type,
@@ -81,9 +79,9 @@ runroot tasks. We'll get to those.
 
 ## Gating Updates: Bodhi
 
-A fresh RPM build sitting in Koji doesn't automatically reach users. For
-branched releases (anything that isn't Rawhide), it goes through
-[Bodhi](https://bodhi.fedoraproject.org/), Fedora's update management system.
+A fresh RPM build sitting in Koji doesn't automatically reach users. It goes
+through [Bodhi](https://bodhi.fedoraproject.org/), Fedora's update management
+system.
 
 Bodhi gates the release of updates through a feedback and testing cycle. A
 packager submits an update containing one or more builds. That update goes
@@ -91,6 +89,9 @@ through a sequence of states: pending, testing, stable. Users and automated
 tests provide karma (+1 / -1). When an update hits +3 karma or spends enough
 days in testing, it will be automatically pushed to stable. If an update hits
 +1 karma the maintainer can manually push to stable (+2 for critical path).
+
+Maintainers can configure (part of) the settings for automatic pushing of updates
+and karma limits.
 
 Behind the scenes, Bodhi manages all of this through Koji tags. When an update
 moves from testing to stable, Bodhi moves the build from the
@@ -342,10 +343,11 @@ images" or "switch boot.iso to Image Builder."
 Changes come in two flavors. **System-Wide** changes affect critical path
 packages or system defaults and need detailed proposals, contingency plans,
 test plans, and FESCo approval. **Self-Contained** changes are scoped to
-packages the proposer owns and get lighter review.
+packages the proposer owns and get lighter review but still need FESco
+approval.
 
 The lifecycle is: draft a wiki page, submit it, get reviewed by the Change
 Wrangler, get voted on by FESCo (the 9-member elected engineering steering
 committee), implement in Rawhide, and meet completion checkpoints tied to the
-release schedule. Miss the Beta Freeze deadline and your change gets deferred
-to the next release automatically.
+release schedule. If a change doesn't meet completion checkpoints it usually
+gets deferred to the next Fedora release.
