@@ -7,6 +7,13 @@ aliases:
   - bootc-on-the-raspberry-pi.html
 ---
 
+> This blogpost is currently broken. A change in `bootc` and `bootupd` behavior
+> made the workaround not work anymore. See [here for details](https://github.com/coreos/bootupd/issues/766#issuecomment-5716583045).
+> We don't have a good way around this and I don't want to update the workaround
+> to look for the ESP on its own.
+> If you want to run `bootc`-based content on your Raspberry Pi series devices
+> I don't currently have a working method for you.
+
 The question on how to use [bootable containers]() on the Raspberry Pi (or other single board computers that have 'interesting' boot setups) comes up quite regularly. For a while now it has been possible in [image-builder](https://github.com/osbuild/image-builder-cli) to create a Raspberry Pi compatible partition table. I don't think this has been written down in long-form anywhere except answers to GitHub issues and Matrix chats. Let's write it down in a longer format and go over the specifics and what will make it easier in the future.
 
 When talking about the Raspberry Pi in this case I specifically mean the Raspberry Pi 3 (`rpi3`), and the Raspberry Pi Zero 2 W (`rpi02w`). These both run the same firmware which is stored in ROM and cannot be updated. The Raspberry Pi 4 (`rpi4`) and the Raspberry Pi 5 (`rpi5`) (more on that later) are easier to handle as they have updateable EEPROM firmware and later versions of this firmware allow more variety in the partition tables and disk images they can boot from.
