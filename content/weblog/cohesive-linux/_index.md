@@ -44,3 +44,7 @@ The reality is that the end *result* doesn't differ much, they achieve the same 
 I will leave with what I think is the current strongest suit of cohesive linux: it's *easy* to build your own things around it because its specification based. The main implementer is `systemd`, but `image-builder` (which I tend to work on) has support for many of these things to be able to build cohesive linux systems with more coming down the line.
 
 The `systemd` tooling of course works together with all of this by allowing me to update a downloaded image offline based on its `sysupdate` snippets, recreate or create its partitions with `repart`, provision it with `firstboot`, mount and inspect with `dissect`, and so much more (food for another post at some time). All these subtools understand the specifications and thus can all work with and together to develop, maintain, and adjust images.
+
+---
+
+P.S. I've been very slowly working on an experimental Fedora remix that fits all of this together and specifically targets Single Board Computers (because I really like those). This has caused a bunch of my work to shift to better support cohesive linux in Fedora packaging and related build tooling. I'll write about that, what all that entails (lots of SELinux...), and what's missing hopefully soon as well.
