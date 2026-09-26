@@ -230,6 +230,9 @@ blockquote {
 blockquote p {
     color: #333; }
 
+blockquote a {
+  color: #34bc24; }
+
 main ul {
   margin-bottom: 1rem; }
 
