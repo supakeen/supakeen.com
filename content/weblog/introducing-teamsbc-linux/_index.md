@@ -19,6 +19,8 @@ Over the past year or so I've been building support into `image-builder` for the
 
 ---
 
+> Here be dragons. This remix is very experimental so don't run it on anything you really care about having uptime. I've ran it for a week or so now on a variety of devices and it has been "OK" but your mileage may vary.
+
 Together this now creates a new Fedora Remix that we can consider highly experimental, but far enough along that I think it's worth a peak and it can take some criticism and/or questions. The goal is to see how far we can integrate the cohesive linux approach into RPM packaging and its assumptions.
 
 If you want to give it a try you can visit the [downloads](https://teamsbc.org/downloads) page. It's probably easiest to get one of the virtual machine images, or you can grab a board-specific image which are currently *only* supplied for the Raspberry Pi 4 and 5 series; though I will likely grow more.
